@@ -1,0 +1,31 @@
+import styled from "styled-components";
+
+type ButtonStyledPropsType = {
+    theme: "outlined" | "primary"
+}
+
+export const ButtonStyled = styled.button<ButtonStyledPropsType> `
+    width: 86px;
+    height: 30px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    color: ${props => props.theme === "outlined" && "#4E71FE" || props.theme === "primary" && "#FFFFFF"};
+    border: 2px solid #4E71FE;
+    background-color:${props => props.theme === "primary" && "#4E71FE" || props.theme === "outlined" && "#FFFFFF"};
+
+    font-family: Arial;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+    &:hover {
+        background-color: #9bafff;
+        border-color: #9bafff;
+        color: white;
+    }
+
+`
