@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Picture } from "./Picture.styled";
-import { Text } from "./Text.styled";
 
 export const Card = styled.div `
     width: 300px;

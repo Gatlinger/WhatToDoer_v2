@@ -20,7 +20,7 @@ export const FormCard = (props: FormCardPropsType) => {
     return (
         <CardBox>
             <AddCard>
-                <TextFieldStyled label={"URL"} onChange={(e) => setUrlData(e.target.value)}></TextFieldStyled>
+                <TextFieldStyled label={"URL изображения"} onChange={(e) => setUrlData(e.target.value)}></TextFieldStyled>
                 <TextFieldStyled label={"Название"} onChange={(e) => setTitleData(e.target.value)}></TextFieldStyled>
                 <TextFieldStyled label={"Описание"} onChange={(e) => setDescrData(e.target.value)}></TextFieldStyled>
                 <ButtonStyled id={"dsfgdsfg"} theme={"primary"} onClick={() => props.callBack(UrlData, TitleData, DescrData)}>ДОБАВИТЬ</ButtonStyled>
@@ -32,7 +32,7 @@ export const FormCard = (props: FormCardPropsType) => {
 const AddCard = styled(Card)`
     display: flex;
     flex-direction: column;
-    background: #ffadad;
+    background: #ffdbdb;
     gap: 30px;
     padding: 20px;
     border-radius: 10px;

@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { AppBarStyled } from "./components/styledComponents/AppBar.styled";
-import { AppBarComponent } from "./components/AppBarComponent";
+import { AppBarComponent, AppBarStyled } from "./components/AppBarComponent";
 import { CardBox, MyCard } from "./components/MyCard";
-import { RollButtonStyled } from "./components/styledComponents/RollButtonStyled.styled";
 import CowJam from "./images/CowJam.gif";
 import LionPic from "./images/i.webp";
 import WorkPic from "./images/Работа.gif"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormCard } from "./components/FormCard";
+import { Button } from "@mui/material";
 
 
 type DataType = {
@@ -18,62 +17,105 @@ type DataType = {
 }
 
 function App() {
+
   const [data, setData] = useState<DataType[]>(
-    [
-      {
-        pictureUrl: CowJam,
-        eventTitle: "Танцевать",
-        eventDescription: "Иди танцевать как корова!",
-        id: "asdsfg"
-      },
-      {
-        pictureUrl: LionPic,
-        eventTitle: "Лежать",
-        eventDescription: "Иди лежать как лев!",
-        id: "sdfheth"
-      },
-      {
-        pictureUrl: WorkPic,
-        eventTitle: "Работать",
-        eventDescription: "Иди работать как Черт!",
-        id: "oefidvuj"
-      }
-    ]
+    JSON.parse(localStorage.getItem("dataBase") || "[]")
   )
 
-  const deleteButtonHandler = (key: string) => {
-    setData(data => data.filter(e => e.id !== key))
+  const [choise, setChoise] = useState<DataType>({} as DataType)
 
+  useEffect(() => {
+    localStorage.setItem("dataBase", JSON.stringify(data))
+  }, [data])
+
+  const ChooseRandomCard = () => {
+    const randomIndex = Math.floor(Math.random() * data.length)
+    if (data[randomIndex].id !== choise.id) {
+      setChoise(data[randomIndex])
+    } else {
+      ChooseRandomCard()
+    }
+  }
+  // const editButtonHandler = (key: string, newTitle: string, newDescription: string) => {
+  //   const newData = data.map(e => e.id === key ? { ...e, eventTitle: newTitle, eventDescription: newDescription } : e)
+  //   setData(newData)
+  // }
+
+  const defaultButtonHandler = () => {
+    setData(basicData)
   }
 
-  const addNewCard = (URL:string, title: string, Description: string) => {
-    const newCard = {
+  const deleteButtonHandler = (key: string) => {
+    const newData = data.filter(e => e.id !== key)
+    setData(newData)
+  }
+
+  const addNewCard = (URL: string, title: string, Description: string) => {
+    const newCardData = [...data,
+    {
       pictureUrl: URL,
       eventTitle: title,
       eventDescription: Description,
       id: crypto.randomUUID()
     }
-    setData([...data, newCard])
+    ]
+    setData(newCardData)
   }
 
-
+  const basicData = [
+    {
+      pictureUrl: CowJam,
+      eventTitle: "Танцевать",
+      eventDescription: "Иди танцевать!",
+      id: "asdsfg"
+    },
+    {
+      pictureUrl: LionPic,
+      eventTitle: "Лежать",
+      eventDescription: "Иди лежать!",
+      id: "sdfheth"
+    },
+    {
+      pictureUrl: WorkPic,
+      eventTitle: "Работать",
+      eventDescription: "Иди работать!",
+      id: "oefidvuj"
+    }
+  ]
 
   return (
     <Box>
-      <AppBarComponent />
-      <RollButtonStyled size="large" variant="contained">ROLL RANDOM</RollButtonStyled>
+      <AppBarComponent callBack={defaultButtonHandler} />
+      <RollButtonStyled size="large" variant="contained" onClick={ChooseRandomCard}>ROLL RANDOM</RollButtonStyled>
+
+      <AppChoiseBox>
+
+
+        <MyCard
+          pictureUrl={choise.pictureUrl}
+          callBack={deleteButtonHandler}
+          eventDescription="Иди и делай!!!"
+          eventTitle={choise.eventTitle}
+          id={choise.id}
+        />
+
+
+
+      </AppChoiseBox>
+
       <AppMainBox>
         {data.map((item, index) => {
           return (
             <MyCard
-             id={item.id} 
-             pictureUrl={item.pictureUrl} 
-             eventTitle={item.eventTitle} 
-             eventDescription={ item.eventDescription}
-             callBack={deleteButtonHandler} />
+              id={item.id}
+              pictureUrl={item.pictureUrl}
+              eventTitle={item.eventTitle}
+              eventDescription={item.eventDescription}
+              callBack={deleteButtonHandler}
+            />
           )
         })}
-        <FormCard callBack={addNewCard}/>
+        <FormCard callBack={addNewCard} />
       </AppMainBox>
     </Box>
   );
@@ -81,6 +123,11 @@ function App() {
 
 export default App;
 
+
+
+export const RollButtonStyled = styled(Button)`
+    
+`
 
 const Box = styled.div`
   width: 45%;
@@ -105,8 +152,8 @@ const Box = styled.div`
   }
 
   ${RollButtonStyled} {
-    height: 160px;
-    width: auto;
+    height: 120px;
+    width: 160px;
     margin: 60px 0px 60px 0px;
     justify-self: center;
     align-self: center;
@@ -136,4 +183,7 @@ const AppMainBox = styled(Box)`
   justify-self: center;
   justify-content: center;
   
+`
+const AppChoiseBox = styled(AppMainBox)`
+  margin-bottom: 100px;
 `

@@ -21,9 +21,9 @@ export function MyCard(props: MyCardPropsType) {
   
   return (
     <CardBox>
-      <Card>
+      <Card onDoubleClick={() => props.callBack(props.id)}>
         <Picture src={props.pictureUrl} />
-        <Text>Иди {props.eventTitle}</Text>
+        <Text>{props.eventTitle}</Text>
         <TextH2>{props.eventDescription}</TextH2>
         <ButtonBox>
           <Checkbox size="large"/>
@@ -40,7 +40,7 @@ export const CardBox = styled.div`
     height: 100vh;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
   
     ButtonStyled + ButtonStyled {
       
