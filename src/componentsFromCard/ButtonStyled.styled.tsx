@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 type ButtonStyledPropsType = {
     theme: "outlined" | "primary"
+    id: string;
 }
 
 export const ButtonStyled = styled.button<ButtonStyledPropsType> `
     width: 86px;
-    height: 30px;
+    height: 66px;
     gap: 0px;
     border-radius: 5px;
     opacity: 0px;

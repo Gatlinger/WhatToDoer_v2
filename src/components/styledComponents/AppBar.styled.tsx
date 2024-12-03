@@ -2,7 +2,7 @@ import { AppBar } from "@mui/material";
 import styled from "styled-components";
 
 export const AppBarStyled = styled(AppBar) `
-    height: 3rem;
+    height: 4rem;
     justify-self: start;
 `
 

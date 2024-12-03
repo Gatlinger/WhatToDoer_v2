@@ -3,18 +3,77 @@ import { AppBarStyled } from "./components/styledComponents/AppBar.styled";
 import { AppBarComponent } from "./components/AppBarComponent";
 import { CardBox, MyCard } from "./components/MyCard";
 import { RollButtonStyled } from "./components/styledComponents/RollButtonStyled.styled";
+import CowJam from "./images/CowJam.gif";
+import LionPic from "./images/i.webp";
+import WorkPic from "./images/Работа.gif"
+import { useState } from "react";
+import { FormCard } from "./components/FormCard";
+
+
+type DataType = {
+  pictureUrl: string
+  eventTitle: string
+  eventDescription: string
+  id: string
+}
 
 function App() {
+  const [data, setData] = useState<DataType[]>(
+    [
+      {
+        pictureUrl: CowJam,
+        eventTitle: "Танцевать",
+        eventDescription: "Иди танцевать как корова!",
+        id: "asdsfg"
+      },
+      {
+        pictureUrl: LionPic,
+        eventTitle: "Лежать",
+        eventDescription: "Иди лежать как лев!",
+        id: "sdfheth"
+      },
+      {
+        pictureUrl: WorkPic,
+        eventTitle: "Работать",
+        eventDescription: "Иди работать как Черт!",
+        id: "oefidvuj"
+      }
+    ]
+  )
+
+  const deleteButtonHandler = (key: string) => {
+    setData(data => data.filter(e => e.id !== key))
+
+  }
+
+  const addNewCard = (URL:string, title: string, Description: string) => {
+    const newCard = {
+      pictureUrl: URL,
+      eventTitle: title,
+      eventDescription: Description,
+      id: crypto.randomUUID()
+    }
+    setData([...data, newCard])
+  }
+
+
+
   return (
     <Box>
-
       <AppBarComponent />
       <RollButtonStyled size="large" variant="contained">ROLL RANDOM</RollButtonStyled>
       <AppMainBox>
-        <MyCard pictureUrl="/images/Banner.jpg" gamesName="Banner Saga"/>
-        <MyCard pictureUrl="/images/Desperados.jpg" gamesName="Desperados"/>
-        <MyCard pictureUrl="/images/KKD.png" gamesName="Kingdom Come"/>
-        <MyCard pictureUrl="/images/NTW.jpg" gamesName="Total War"/>
+        {data.map((item, index) => {
+          return (
+            <MyCard
+             id={item.id} 
+             pictureUrl={item.pictureUrl} 
+             eventTitle={item.eventTitle} 
+             eventDescription={ item.eventDescription}
+             callBack={deleteButtonHandler} />
+          )
+        })}
+        <FormCard callBack={addNewCard}/>
       </AppMainBox>
     </Box>
   );
@@ -46,10 +105,11 @@ const Box = styled.div`
   }
 
   ${RollButtonStyled} {
-    margin: 20px 0px 20px 0px;
+    height: 160px;
+    width: auto;
+    margin: 60px 0px 60px 0px;
     justify-self: center;
     align-self: center;
-    height: auto;
   }
 
   @media screen and (max-width: 576px){
