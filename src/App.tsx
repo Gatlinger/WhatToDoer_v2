@@ -15,6 +15,7 @@ export type DataType = {
   eventTitle: string
   eventDescription: string
   id: string
+  checked: boolean
 }
 
 function App() {
@@ -36,12 +37,34 @@ function App() {
   }, [data]
   )
 
+  // const randomIndex = Math.floor(Math.random() * data.length)
+
   const ChooseRandomCard = () => {
-    const randomIndex = Math.floor(Math.random() * data.length)
-    if (data[randomIndex].id !== choise.id) {
-      setChoise(data[randomIndex])
+
+    const filteredArray = data.filter(e => e.checked === true ? true : false)
+    const randomIndex = Math.floor(Math.random() * filteredArray.length)
+
+    // if (filteredArray[randomIndex].id !== choise.id && filteredArray.length > 1) {
+    //     setChoise(filteredArray[randomIndex])
+    //     console.log('222');
+    //   } else if (filteredArray.length === 1) {
+    //     setChoise(filteredArray[0])
+    //   } else if (filteredArray.length === 0) {
+    //     alert("Выберете хотябы одно задание!")
+    //   }
+
+    if (randomIndex === 0 && filteredArray.length === 0) {
+      alert("Выберете хотябы одно задание!")
+    } else if (randomIndex === 0 && filteredArray.length === 1) {
+      setChoise(filteredArray[0])
+      console.log('111');
+    } else if (filteredArray[randomIndex].id !== choise.id && filteredArray.length > 1) {
+      setChoise(filteredArray[randomIndex])
+      console.log('222');
     } else {
       ChooseRandomCard()
+      console.log('333');
+      
     }
   }
   // const editButtonHandler = (key: string, newTitle: string, newDescription: string) => {
@@ -70,10 +93,16 @@ function App() {
       pictureUrl: URL,
       eventTitle: title,
       eventDescription: Description,
-      id: crypto.randomUUID()
+      id: crypto.randomUUID(),
+      checked: true
     }
     ]
     setData(newCardData)
+  }
+
+  const checkBoxHandler = (id: string) => {
+    const newData = data.map(e => e.id === id ? { ...e, checked: !e.checked } : e)
+    setData(newData)
   }
 
   const basicData = [
@@ -81,19 +110,23 @@ function App() {
       pictureUrl: CowJam,
       eventTitle: "Танцевать",
       eventDescription: "Иди танцевать!",
-      id: "asdsfg"
+      id: "asdsfg",
+      checked: true
+
     },
     {
       pictureUrl: LionPic,
       eventTitle: "Лежать",
       eventDescription: "Иди лежать!",
-      id: "sdfheth"
+      id: "sdfheth",
+      checked: true
     },
     {
       pictureUrl: WorkPic,
       eventTitle: "Работать",
       eventDescription: "Иди работать!",
-      id: "oefidvuj"
+      id: "oefidvuj",
+      checked: true
     }
   ]
 
@@ -103,22 +136,7 @@ function App() {
       <RollButtonStyled size="large" variant="contained" onClick={ChooseRandomCard}>ROLL RANDOM</RollButtonStyled>
 
       <AppChoiseBox>
-
-
-
-        <RandomCardComponent card={choise}/>
-
-        
-        {/* <MyCard
-          pictureUrl={choise.pictureUrl}
-          callBack={deleteButtonHandler}
-          eventDescription={choise.eventDescription}
-          eventTitle={choise.eventTitle}
-          id={choise.id}
-        /> */}
-
-
-
+        <RandomCardComponent card={choise} checkBoxHandler={checkBoxHandler} />
       </AppChoiseBox>
 
       <AppMainBox>
@@ -129,7 +147,9 @@ function App() {
               pictureUrl={item.pictureUrl}
               eventTitle={item.eventTitle}
               eventDescription={item.eventDescription}
+              checked={item.checked}
               callBack={deleteButtonHandler}
+              checkBoxHandler={checkBoxHandler}
             />
           )
         })}
