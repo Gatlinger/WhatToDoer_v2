@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/WhatToDoer_v2/static/js/main.6e36d567.js",
+    "main.js": "/WhatToDoer_v2/static/js/main.bf14cd24.js",
     "static/js/453.60e0072b.chunk.js": "/WhatToDoer_v2/static/js/453.60e0072b.chunk.js",
     "static/media/CowJam.gif": "/WhatToDoer_v2/static/media/CowJam.190f4a3547c81cac35c9.gif",
     "static/media/i.webp": "/WhatToDoer_v2/static/media/i.a9dbfde5a3d000dccd83.webp",
     "static/media/Работа.gif": "/WhatToDoer_v2/static/media/Работа.23caec535de46a809376.gif",
     "index.html": "/WhatToDoer_v2/index.html",
-    "main.6e36d567.js.map": "/WhatToDoer_v2/static/js/main.6e36d567.js.map",
+    "main.bf14cd24.js.map": "/WhatToDoer_v2/static/js/main.bf14cd24.js.map",
     "453.60e0072b.chunk.js.map": "/WhatToDoer_v2/static/js/453.60e0072b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6e36d567.js"
+    "static/js/main.bf14cd24.js"
   ]
 }
