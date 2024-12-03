@@ -7,9 +7,10 @@ import WorkPic from "./images/Работа.gif"
 import { useEffect, useState } from "react";
 import { FormCard } from "./components/FormCard";
 import { Button } from "@mui/material";
+import { RandomCardComponent } from "./components/RandomCardComponent";
 
 
-type DataType = {
+export type DataType = {
   pictureUrl: string
   eventTitle: string
   eventDescription: string
@@ -26,7 +27,14 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("dataBase", JSON.stringify(data))
-  }, [data])
+    setChoise({
+      pictureUrl: "https://i.ytimg.com/vi/L9W4oeEwUSY/maxresdefault.jpg",
+      eventTitle: 'Ничего',
+      eventDescription: "Нароль уже чего нибудь!",
+      id: 'нет'
+    } as DataType)
+  }, [data]
+  )
 
   const ChooseRandomCard = () => {
     const randomIndex = Math.floor(Math.random() * data.length)
@@ -43,6 +51,12 @@ function App() {
 
   const defaultButtonHandler = () => {
     setData(basicData)
+    setChoise({
+      pictureUrl: "https://i.ytimg.com/vi/L9W4oeEwUSY/maxresdefault.jpg",
+      eventTitle: 'Ничего',
+      eventDescription: "Нароль уже чего нибудь!",
+      id: 'нет'
+    } as DataType)
   }
 
   const deleteButtonHandler = (key: string) => {
@@ -91,13 +105,17 @@ function App() {
       <AppChoiseBox>
 
 
-        <MyCard
+
+        <RandomCardComponent card={choise}/>
+
+        
+        {/* <MyCard
           pictureUrl={choise.pictureUrl}
           callBack={deleteButtonHandler}
-          eventDescription="Иди и делай!!!"
+          eventDescription={choise.eventDescription}
           eventTitle={choise.eventTitle}
           id={choise.id}
-        />
+        /> */}
 
 
 

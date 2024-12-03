@@ -7,7 +7,7 @@ import { TextH2 } from "../componentsFromCard/TextH2.styled";
 import { Checkbox } from "@mui/material";
 
 
-type MyCardPropsType = {
+export type MyCardPropsType = {
   pictureUrl: string;
   eventTitle: string;
   eventDescription: string;
