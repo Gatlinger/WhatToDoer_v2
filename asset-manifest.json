@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/WhatToDoer_v2/static/js/main.522f5009.js",
+    "main.js": "/WhatToDoer_v2/static/js/main.b1f82357.js",
     "static/js/453.60e0072b.chunk.js": "/WhatToDoer_v2/static/js/453.60e0072b.chunk.js",
     "index.html": "/WhatToDoer_v2/index.html",
-    "main.522f5009.js.map": "/WhatToDoer_v2/static/js/main.522f5009.js.map",
+    "main.b1f82357.js.map": "/WhatToDoer_v2/static/js/main.b1f82357.js.map",
     "453.60e0072b.chunk.js.map": "/WhatToDoer_v2/static/js/453.60e0072b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.522f5009.js"
+    "static/js/main.b1f82357.js"
   ]
 }
