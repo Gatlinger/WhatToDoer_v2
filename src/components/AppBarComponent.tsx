@@ -1,13 +1,18 @@
 import styled from "styled-components"
 import { AppBar, Button, Menu, MenuItem, Toolbar } from "@mui/material"
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CardsReduserActionType, DataType, resetCardsAC } from "../state/cardsReduser";
+import { AppRootStateType } from "../state/store";
 
 type AppBarComponentPropsType = {
-  callBack: () => void
 }
 
 export const AppBarComponent = (props: AppBarComponentPropsType) => {
 
+  const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
+  const dispatch = useDispatch();
+  
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -17,6 +22,9 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
     setAnchorEl(null);
   };
 
+  const defaultButtonHandler = () => {
+    dispatch(resetCardsAC())
+  }
 
   return (
     <AppBarStyled>
@@ -42,7 +50,7 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={props.callBack}>Сбросить</MenuItem>
+          <MenuItem onClick={defaultButtonHandler}>Сбросить</MenuItem>
         </Menu>
 
         <H1Styled>WhatToDoer_v2</H1Styled>

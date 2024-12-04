@@ -4,29 +4,72 @@ import { CardBox } from "./MyCard"
 import styled from "styled-components"
 import { ButtonStyled } from "../componentsFromCard/ButtonStyled.styled"
 import React from "react"
+import { useDispatch } from "react-redux"
+import { AddCardAC, ChangeCardAC } from "../state/cardsReduser"
 
 type FormCardPropsType = {
-    callBack: (URL:string, title: string, Description: string) => void
+  callBack: (URL: string, title: string, Description: string) => void
+  id: string
+  URL?: string
+  title?: string
+  description?: string
+  name?: string
+  setDoubleClicked?: (status: boolean) => void
 }
 
 
 export const FormCard = (props: FormCardPropsType) => {
 
-    const [UrlData, setUrlData] = React.useState("")
-    const [TitleData, setTitleData] = React.useState("")
-    const [DescrData, setDescrData] = React.useState("")
+  const [UrlData, setUrlData] = React.useState(props.URL || "")
+  const [TitleData, setTitleData] = React.useState(props.title || "")
+  const [DescrData, setDescrData] = React.useState(props.description || "")
+  const dispatch = useDispatch()
 
+  return (
+    <CardBox>
+      <AddCard>
 
-    return (
-        <CardBox>
-            <AddCard>
-                <TextFieldStyled label={"URL изображения"} onChange={(e) => setUrlData(e.target.value)}></TextFieldStyled>
-                <TextFieldStyled label={"Название"} onChange={(e) => setTitleData(e.target.value)}></TextFieldStyled>
-                <TextFieldStyled label={"Описание"} onChange={(e) => setDescrData(e.target.value)}></TextFieldStyled>
-                <ButtonStyled id={"dsfgdsfg"} theme={"primary"} onClick={() => props.callBack(UrlData, TitleData, DescrData)}>ДОБАВИТЬ</ButtonStyled>
-            </AddCard>
-        </CardBox>
-    )
+        <TextFieldStyled
+          focused={props.URL ? true : false}
+          value={UrlData}
+          label={"URL изображения"}
+          onChange={(e) => {
+            setUrlData(e.target.value)
+          }}>
+        </TextFieldStyled>
+
+        <TextFieldStyled
+          focused={props.title ? true : false}
+          value={TitleData}
+          label={"Название"}
+          onChange={(e) => setTitleData(e.target.value)}>
+        </TextFieldStyled>
+
+        <TextFieldStyled
+          focused={props.description ? true : false}
+          value={DescrData}
+          label={"Описание"}
+          onChange={(e) => setDescrData(e.target.value)}>
+        </TextFieldStyled>
+
+        <ButtonStyled
+          id={"dsfgdsfg"}
+          theme={"primary"}
+          onClick={() => 
+            props.name === "Изменить"
+                ?() => {dispatch(ChangeCardAC(UrlData, TitleData, DescrData, props.id))
+                  if (props.setDoubleClicked) {
+                    props.setDoubleClicked(false)
+                  } 
+                }
+                : dispatch(AddCardAC(UrlData, TitleData, DescrData))
+          }>
+          {props.name ? props.name : "Добавить"}
+        </ButtonStyled>
+
+      </AddCard>
+    </CardBox>
+  )
 }
 
 const AddCard = styled(Card)`
