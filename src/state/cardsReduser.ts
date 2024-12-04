@@ -71,12 +71,10 @@ export const initialState: DataType[] =
 export const cardsReducer = (state: DataType[] = initialState, action: CardsReduserActionType) => {
     switch (action.type) {
         case 'SET_CARDS_TO_DEFAULT': {
-            console.log('SET_CARDS_TO_DEFAULT');
             localStorage.setItem("dataBase", JSON.stringify(initialState))
             return [...initialState]
         }
         case 'DELETE_CARD': {
-            console.log('DELETE_CARD');
             const newArray = state.filter(card => card.id !== action.id)
             localStorage.setItem("dataBase", JSON.stringify(newArray))
             return newArray

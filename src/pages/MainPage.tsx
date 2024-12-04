@@ -28,6 +28,7 @@ export const MainPage = () => {
   }, [cards]
   )
 
+
   const ChooseRandomCard = () => {
     const filteredArray = cards.filter(e => e.checked === true ? true : false)
     const randomIndex = Math.floor(Math.random() * filteredArray.length)
@@ -43,7 +44,6 @@ export const MainPage = () => {
     } else {
       ChooseRandomCard()
     }
-    console.log(choise);
     
   }
 
@@ -89,10 +89,14 @@ export const MainPage = () => {
   )
 }
 
-const MainPageWrapper = styled.div`
-    display: flex;
-    position: static;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+export const MainPageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: static;
+  align-items: start;
+  justify-self: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: aliceblue;
 `

@@ -4,6 +4,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardsReduserActionType, DataType, resetCardsAC } from "../state/cardsReduser";
 import { AppRootStateType } from "../state/store";
+import { resetArchiveAC } from "../state/archiveReduser";
+import { NavLink } from "react-router-dom";
 
 type AppBarComponentPropsType = {
 }
@@ -12,7 +14,7 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
 
   const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
   const dispatch = useDispatch();
-  
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +26,9 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
 
   const defaultButtonHandler = () => {
     dispatch(resetCardsAC())
+  }
+  const deleteDefaultButtonHandler = () => {
+    dispatch(resetArchiveAC())
   }
 
   return (
@@ -50,7 +55,10 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={defaultButtonHandler}>Сбросить</MenuItem>
+          <MenuItem><NavLink to={'/WhatToDoer_v2/main'}>Главная Страница</NavLink></MenuItem>
+          <MenuItem><NavLink to={'WhatToDoer_v2/archive'}>Страница Архива</NavLink></MenuItem>
+          <MenuItem style={{marginTop: 50}} onClick={defaultButtonHandler}>Сбросить Занятия</MenuItem>
+          <MenuItem onClick={deleteDefaultButtonHandler}>Сбросить Архив</MenuItem>
         </Menu>
 
         <H1Styled>WhatToDoer_v2</H1Styled>

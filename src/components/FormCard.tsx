@@ -25,6 +25,15 @@ export const FormCard = (props: FormCardPropsType) => {
   const [DescrData, setDescrData] = React.useState(props.description || "")
   const dispatch = useDispatch()
 
+  const changeHandler = () => {
+    console.log('111231234');
+    
+    dispatch(ChangeCardAC(UrlData, TitleData, DescrData, props.id))
+    if (props.setDoubleClicked) {
+      props.setDoubleClicked(false)
+    }
+  }
+
   return (
     <CardBox>
       <AddCard>
@@ -55,14 +64,11 @@ export const FormCard = (props: FormCardPropsType) => {
         <ButtonStyled
           id={"dsfgdsfg"}
           theme={"primary"}
-          onClick={() => 
-            props.name === "Изменить"
-                ?() => {dispatch(ChangeCardAC(UrlData, TitleData, DescrData, props.id))
-                  if (props.setDoubleClicked) {
-                    props.setDoubleClicked(false)
-                  } 
-                }
-                : dispatch(AddCardAC(UrlData, TitleData, DescrData))
+          onClick={() =>
+            
+             props.name === "Изменить" 
+             ? changeHandler() 
+             : dispatch(AddCardAC(UrlData, TitleData, DescrData))
           }>
           {props.name ? props.name : "Добавить"}
         </ButtonStyled>
@@ -72,7 +78,7 @@ export const FormCard = (props: FormCardPropsType) => {
   )
 }
 
-const AddCard = styled(Card)`
+export const AddCard = styled(Card)`
     display: flex;
     flex-direction: column;
     background: #ffdbdb;
@@ -88,7 +94,7 @@ const AddCard = styled(Card)`
 `
 
 
-const TextFieldStyled = styled(TextField)`
+export const TextFieldStyled = styled(TextField)`
   background: white;
   & label.Mui-focused {
     color: black;

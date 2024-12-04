@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { AppBarComponent, AppBarStyled } from "./components/AppBarComponent";
-import { CardBox} from "./components/MyCard";
+import { CardBox } from "./components/MyCard";
 import { Button } from "@mui/material";
 import { MainPage } from "./pages/MainPage";
+import { ArchivePage, ArchivePageWrapper } from "./pages/ArchivePage";
+import { Route, Routes } from "react-router-dom";
 
 
 
@@ -10,8 +12,13 @@ import { MainPage } from "./pages/MainPage";
 function App() {
   return (
     <Box>
-      <AppBarComponent/>
-      <MainPage/>
+      <AppBarComponent />
+      <Routes>
+          <Route path="WhatToDoer_v2/main" element={<MainPage />} />
+          <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
+        {/* <MainPage />
+        <ArchivePage /> */}
+      </Routes>
     </Box>
   );
 }
@@ -24,7 +31,7 @@ export const RollButtonStyled = styled(Button)`
     
 `
 
- export const Box = styled.div`
+export const Box = styled.div`
   width: 45%;
   display: flex;
   flex-direction: column;
@@ -34,6 +41,16 @@ export const RollButtonStyled = styled(Button)`
   justify-content: center;
   gap: 10px;
   background-color: aliceblue;
+
+  ${ArchivePageWrapper} {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
 
   ${AppBarStyled} {
     position: relative;
@@ -56,6 +73,7 @@ export const RollButtonStyled = styled(Button)`
   }
 
   @media screen and (max-width: 576px){
+    position: relative;
     flex-direction: column;
     width: 100%;
     align-items: center;
@@ -63,6 +81,7 @@ export const RollButtonStyled = styled(Button)`
   }
 
   @media screen and (max-width: 1024px) and (min-width: 577px){
+    position: relative;
     flex-direction: column;
     width: 66%;
     align-items: center;

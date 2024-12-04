@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { AddCardAC, deleteCardsAC } from "../state/cardsReduser";
 import { useState } from "react";
 import { FormCard } from "./FormCard";
+import { archiveCardAC } from "../state/archiveReduser";
 
 
 export type MyCardPropsType = {
@@ -30,11 +31,22 @@ export function MyCard(props: MyCardPropsType) {
     setDoubleClicked((prev => !doubleClicked))
   }
 
+  const deleteCardHandler = () => {
+    const deletedCard = {
+      pictureUrl: props.pictureUrl,
+      eventTitle: props.eventTitle,
+      eventDescription: props.eventDescription,
+      id: props.id,
+      checked: true
+    }
+    dispatch(archiveCardAC(deletedCard))
+    dispatch(deleteCardsAC(props.id))
+    
+  }
+
   const dispatch = useDispatch()
   return (
-    <CardBox >
-
-
+    < >
       {doubleClicked === false
         ? <Card onDoubleClick={onDoubleClickHandler} style={{ backgroundColor: props.color }}>
           <Picture src={props.pictureUrl} />
@@ -43,7 +55,7 @@ export function MyCard(props: MyCardPropsType) {
           <ButtonBox>
             <Checkbox checked={props.checked} size="large" onClick={() => { props.checkBoxHandler(props.id) }} />
 
-            <ButtonStyled id={props.id} theme={'outlined'} onClick={() => dispatch(deleteCardsAC(props.id))}>УДАЛИТЬ</ButtonStyled>
+            <ButtonStyled id={props.id} theme={'outlined'} onClick={deleteCardHandler}>УДАЛИТЬ</ButtonStyled>
           </ButtonBox>
         </Card>
         : <FormCard
@@ -55,22 +67,7 @@ export function MyCard(props: MyCardPropsType) {
           id={props.id}
           setDoubleClicked={setDoubleClicked}
         />}
-
-
-
-      {/* <Card onDoubleClick={onDoubleClickHandler} style={{backgroundColor: props.color}}>
-        <Picture src={props.pictureUrl} />
-        <Text>{props.eventTitle}</Text>
-        <TextH2 style={{color: props.color === "yellowgreen" ? "black" : "ABB3BA"}}>{props.eventDescription}</TextH2>
-        <ButtonBox>
-          <Checkbox checked={props.checked} size="large" onClick={() => {props.checkBoxHandler(props.id)}}/>
-
-          <ButtonStyled id={props.id} theme={'outlined'} onClick={() => dispatch(deleteCardsAC(props.id))}>УДАЛИТЬ</ButtonStyled>
-        </ButtonBox>
-      </Card> */}
-
-
-    </CardBox>
+    </>
   );
 }
 
@@ -86,7 +83,7 @@ export const CardBox = styled.div`
     }
   `
 
-const ButtonBox = styled.div`
+export const ButtonBox = styled.div`
     display: flex;
     position: relative;
     flex-direction: row;

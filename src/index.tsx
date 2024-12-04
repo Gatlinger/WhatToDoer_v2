@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { GlobalStyles } from './components/styledComponents/GlobalSlyles';
 import { store } from './state/store';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
       <GlobalStyles />
     </Provider>
   </React.StrictMode>
