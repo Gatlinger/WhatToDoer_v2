@@ -11,8 +11,12 @@ type returnCardActionType = {
     type: 'RETORN_CARD_TO_MAIN'
     id: string
 }
+type deleteCardActionType = {
+    type: 'DELETE_CARD_FROM_ARCHIVE'
+    id: string
+}
 
-type archiveReduserActionType = archiveCardAC | resetArchiveActionType | returnCardActionType
+type archiveReduserActionType = archiveCardAC | resetArchiveActionType | returnCardActionType | deleteCardActionType
 
 
 const initialState: DataType[] = []
@@ -43,6 +47,11 @@ export const archiveReduser = (state: DataType[] = initialState, action: archive
             localStorage.setItem('archiveStorage', JSON.stringify(newArray))
             return newArray
         }
+        case 'DELETE_CARD_FROM_ARCHIVE': {
+            const newArray = state.filter(e => e.id!== action.id)
+            localStorage.setItem('archiveStorage', JSON.stringify(newArray))
+            return newArray
+        }
         default:
             return JSON.parse(localStorage.getItem("archiveStorage") || "[]")
     }
@@ -58,4 +67,8 @@ export const resetArchiveAC = () => {
 
 export const returnCardAC = (id: string) => {
     return { type: 'RETORN_CARD_TO_MAIN', id }
+}
+
+export const deleteArchiveCardAC = (id: string) => {
+    return { type: 'DELETE_CARD_FROM_ARCHIVE', id }
 }

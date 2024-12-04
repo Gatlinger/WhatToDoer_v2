@@ -10,6 +10,7 @@ import { AddCardAC, deleteCardsAC } from "../state/cardsReduser";
 import { useState } from "react";
 import { FormCard } from "./FormCard";
 import { archiveCardAC } from "../state/archiveReduser";
+import { Create } from "@material-ui/icons";
 
 
 export type MyCardPropsType = {
@@ -28,7 +29,7 @@ export function MyCard(props: MyCardPropsType) {
   const [doubleClicked, setDoubleClicked] = useState(false)
 
   const onDoubleClickHandler = () => {
-    setDoubleClicked((prev => !doubleClicked))
+    setDoubleClicked((prev => prev = !doubleClicked))
   }
 
   const deleteCardHandler = () => {
@@ -41,14 +42,17 @@ export function MyCard(props: MyCardPropsType) {
     }
     dispatch(archiveCardAC(deletedCard))
     dispatch(deleteCardsAC(props.id))
-    
+
   }
 
   const dispatch = useDispatch()
   return (
     < >
       {doubleClicked === false
-        ? <Card onDoubleClick={onDoubleClickHandler} style={{ backgroundColor: props.color }}>
+        ? <Card onDoubleClick={onDoubleClickHandler} style={{ backgroundColor: props.color || 'aliceblue' }}>
+          <UpdateButton onClick={() => {setDoubleClicked(true)}}>
+            <Create style={{marginLeft: 2.5, marginTop: 1.5}}/>
+          </UpdateButton>
           <Picture src={props.pictureUrl} />
           <Text>{props.eventTitle}</Text>
           <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>{props.eventDescription}</TextH2>
@@ -71,13 +75,27 @@ export function MyCard(props: MyCardPropsType) {
   );
 }
 
+export const UpdateButton = styled.div`
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  border: 2px solid black;
+  border-radius: 100%;
+  color: black;
+  justify-self: flex-end;
+  left: 10px;
+  bottom: 10px;
+  background-color: #fdfde9;
+  gap: 10px;
+`
+
 export const CardBox = styled.div`
     display: flex;
     height: 100vh;
     justify-content: center;
     align-items: center;
     gap: 15px;
-
     ButtonStyled + ButtonStyled {
       
     }
@@ -87,14 +105,13 @@ export const ButtonBox = styled.div`
     display: flex;
     position: relative;
     flex-direction: row;
-    margin-top: 20px;
-    margin-left: 20px;
-    gap: 10px;
+    margin-left: 30px;
 
     ${ButtonStyled} {
       position: absolute;
       direction: inherit;
       right: 0;
       margin-right: 20px;
+      bottom: 1px;
     }
   `

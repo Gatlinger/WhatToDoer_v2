@@ -7,31 +7,42 @@ import { ArchiveCard } from "../components/ArchiveCard"
 
 export const ArchivePage = () => {
 
-    const archive = useSelector<AppRootStateType, DataType[]>(state => state.archive)
-    const dispatch = useDispatch()
+  const archive = useSelector<AppRootStateType, DataType[]>(state => state.archive)
+  const dispatch = useDispatch()
 
-    const checkBoxHandler = (id: string) => {
-        dispatch(checkBoxHandlerAC(id))
-    }
-    return (
-        <ArchivePageWrapper>
-            <CardBox>
-                {archive.map((item, index) => {
-                    return (
-                        <ArchiveCard
-                            id={item.id}
-                            pictureUrl={item.pictureUrl}
-                            eventTitle={item.eventTitle}
-                            eventDescription={item.eventDescription}
-                            checked={item.checked}
-                            checkBoxHandler={checkBoxHandler}
-                            color="#FFFFE9"
-                        />
-                    )
-                })}
-            </CardBox>
-        </ArchivePageWrapper>
-    )
+  const checkBoxHandler = (id: string) => {
+    dispatch(checkBoxHandlerAC(id))
+  }
+  return (
+    <ArchivePageWrapper>
+      <CardBox>
+        {archive.length > 0
+          ? archive.map((item, index) => {
+            return (
+              <ArchiveCard
+                id={item.id}
+                pictureUrl={item.pictureUrl}
+                eventTitle={item.eventTitle}
+                eventDescription={item.eventDescription}
+                checked={item.checked}
+                checkBoxHandler={checkBoxHandler}
+                color="#FFFFE9"
+              />
+            )
+          })
+          : <ArchiveCard
+            id={"empty-archive-card"}
+            pictureUrl={"https://i.ytimg.com/vi/L9W4oeEwUSY/maxresdefault.jpg"}
+            eventTitle={"Архив Пуст"}
+            eventDescription={"Архив пока пустует!"}
+            checked={true}
+            checkBoxHandler={checkBoxHandler}
+            color="#FFFFE9"
+          />
+        }
+      </CardBox>
+    </ArchivePageWrapper>
+  )
 }
 
 export const ArchivePageWrapper = styled.div`

@@ -5,8 +5,10 @@ import { TextH2 } from "../componentsFromCard/TextH2.styled"
 import { ButtonStyled } from "../componentsFromCard/ButtonStyled.styled"
 import styled from "styled-components"
 import { useDispatch } from "react-redux"
-import { returnCardAC } from "../state/archiveReduser"
+import { deleteArchiveCardAC, returnCardAC } from "../state/archiveReduser"
 import { AddCardAC } from "../state/cardsReduser"
+import { UpdateButton } from "./MyCard"
+import { Delete } from "@material-ui/icons"
 
 export type ArchiveCardPropsType = {
     pictureUrl: string;
@@ -35,16 +37,23 @@ export const ArchiveCard = (props: ArchiveCardPropsType) => {
         dispatch(AddCardAC(props.pictureUrl, props.eventTitle, props.eventDescription))
     }
 
+    const deleteArchiveCardHandler = () => {
+        dispatch(deleteArchiveCardAC(props.id))
+    }
+
     return (
         <Card style={{ backgroundColor: props.color }}>
-            <Picture src={props.pictureUrl} />
+            <DeleteButton onClick={deleteArchiveCardHandler}>
+                <Delete style={{marginLeft: 2.5, marginTop: 1.5}}/>
+            </DeleteButton>
+            <Picture src={props.pictureUrl} style={{}} />
             <Text>{props.eventTitle}</Text>
             <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "black" }}>{props.eventDescription}</TextH2>
             <ReturnButtonBox>
                 <ButtonStyled
                     id={props.id}
                     theme={'primary'}
-                    onClick={() => {returnCardHandler(props.id)}}>ВЕРНУТЬ</ButtonStyled>
+                    onClick={() => { returnCardHandler(props.id) }}>ВЕРНУТЬ</ButtonStyled>
             </ReturnButtonBox>
         </Card>
     )
@@ -59,4 +68,8 @@ const ReturnButtonBox = styled.div`
       position: relative;
       width: 80%;
     }
+  `
+
+const DeleteButton = styled(UpdateButton)`
+    background-color: #f52b2b;
   `

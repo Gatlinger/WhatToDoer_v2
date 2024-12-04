@@ -14,8 +14,9 @@ function App() {
     <Box>
       <AppBarComponent />
       <Routes>
-          <Route path="WhatToDoer_v2/main" element={<MainPage />} />
-          <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
+        <Route path="WhatToDoer_v2/" element={<MainPage />} />
+        <Route path="WhatToDoer_v2/main" element={<MainPage />} />
+        <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
         {/* <MainPage />
         <ArchivePage /> */}
       </Routes>
@@ -40,7 +41,7 @@ export const Box = styled.div`
   justify-self: center;
   justify-content: center;
   gap: 10px;
-  background-color: aliceblue;
+  background-color: transparent;
 
   ${ArchivePageWrapper} {
     display: flex;
@@ -97,6 +98,7 @@ export const AppMainBox = styled(Box)`
   align-items: start;
   justify-self: center;
   justify-content: center;
+  
   
 `
 export const AppChoiseBox = styled(AppMainBox)`

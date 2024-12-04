@@ -14,7 +14,7 @@ export const ButtonStyled = styled.button<ButtonStyledPropsType> `
     color: ${props => props.theme === "outlined" && "#4E71FE" || props.theme === "primary" && "#FFFFFF"};
     border: 2px solid #4E71FE;
     background-color:${props => props.theme === "primary" && "#4E71FE" || props.theme === "outlined" && "#FFFFFF"};
-
+    bottom: 10px;
     font-family: Arial;
     font-size: 10px;
     font-weight: 700;

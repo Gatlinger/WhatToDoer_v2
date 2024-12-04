@@ -14,6 +14,7 @@ export const Text = styled.h1 `
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    bottom: 12px
 
 
 `

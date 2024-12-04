@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Picture = styled.img`
+    position: relative;
     width: 280px;
     height: 170px;
     margin-top: 10px;
@@ -9,5 +10,5 @@ export const Picture = styled.img`
     background-color: #60a1a1;
     border-radius: 10px;
     opacity: 0px;
-
+    bottom: 20px;
 `

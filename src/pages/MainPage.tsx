@@ -98,5 +98,4 @@ export const MainPageWrapper = styled.div`
   justify-self: center;
   justify-content: center;
   gap: 10px;
-  background-color: aliceblue;
 `
