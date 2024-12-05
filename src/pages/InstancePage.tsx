@@ -37,16 +37,14 @@ export const InstancePage = (props: InstancePagePropsType) => {
         const filteredArray = cards.filter(e => e.checked === true ? true : false)
         const randomIndex = Math.floor(Math.random() * filteredArray.length)
         setShown(false)
-        if (randomIndex === 0 && filteredArray.length === 0) {
-            alert("Выберете хотябы одно задание!")
-        } else if (randomIndex === 0 && filteredArray.length === 1) {
-            localStorage.setItem("choisenItem", JSON.stringify(filteredArray[0]))
-            setChoise(filteredArray[0])
-        } else if (filteredArray[randomIndex].id !== choise.id && filteredArray.length > 1) {
+        if (filteredArray[randomIndex].id === choise.id) {
+            setShown(false) 
+            localStorage.setItem("choisenItem", JSON.stringify(filteredArray[randomIndex]))
+            setChoise({...filteredArray[randomIndex]})
+        } else {
+            setShown(false)
             localStorage.setItem("choisenItem", JSON.stringify(filteredArray[randomIndex]))
             setChoise(filteredArray[randomIndex])
-        } else {
-            ChooseRandomCard()
         }
 
     }
