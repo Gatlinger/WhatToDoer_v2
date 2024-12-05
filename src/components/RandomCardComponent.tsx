@@ -23,6 +23,7 @@ export const RandomCardComponent = (props: RandomCardComponentPropsType) => {
             {props.card.id === "нет" 
             ? <div></div> 
             : <MyCard
+            pageVariant={'randomCard'}
             pictureUrl={props.card.pictureUrl}
             eventDescription={props.card.eventDescription}
             eventTitle={props.card.eventTitle}

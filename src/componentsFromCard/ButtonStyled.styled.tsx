@@ -22,6 +22,7 @@ export const ButtonStyled = styled.button<ButtonStyledPropsType> `
     text-align: center;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
+    cursor: pointer;
 
     &:hover {
         background-color: #9bafff;

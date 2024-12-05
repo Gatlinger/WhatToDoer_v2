@@ -74,6 +74,7 @@ export const MainPage = () => {
         {cards.map((item, index) => {
           return (
             <MyCard
+              pageVariant='main'
               id={item.id}
               pictureUrl={item.pictureUrl}
               eventTitle={item.eventTitle}

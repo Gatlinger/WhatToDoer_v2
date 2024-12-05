@@ -2,6 +2,7 @@ import { Console } from "console";
 import CowJam from "../images/CowJam.gif";
 import LionPic from "../images/i.webp";
 import WorkPic from "../images/Работа.gif"
+import { randomUUID } from "crypto";
 
 export type DataType = {
     pictureUrl: string
@@ -56,7 +57,7 @@ export const initialState: DataType[] =
             pictureUrl: CowJam,
             eventTitle: "Танцевать",
             eventDescription: "Иди танцевать!",
-            id: "asdsfg",
+            id: crypto.randomUUID(),
             checked: true
 
         },
@@ -64,14 +65,14 @@ export const initialState: DataType[] =
             pictureUrl: LionPic,
             eventTitle: "Лежать",
             eventDescription: "Иди лежать!",
-            id: "sdfheth",
+            id: crypto.randomUUID(),
             checked: true
         },
         {
             pictureUrl: WorkPic,
             eventTitle: "Работать",
             eventDescription: "Иди работать!",
-            id: "oefidvuj",
+            id: crypto.randomUUID(),
             checked: true
         }
     ]
@@ -80,7 +81,7 @@ export const HeadsOrTales = [
         pictureUrl: "https://avatars.mds.yandex.net/i?id=8b6963817db5af38bed0ad6990a1d5b5_l-5228496-images-thumbs&n=13",
         eventTitle: "Орел",
         eventDescription: "Выпал Орел!",
-        id: "asfgasgee",
+        id: crypto.randomUUID(),
         checked: true
 
     },
@@ -88,7 +89,7 @@ export const HeadsOrTales = [
         pictureUrl: "https://sun9-68.userapi.com/impg/Gjwv8Uvoh1G-P_9Yc3rQ7H-TEgB5Gp6Mtwqwkg/n_8OBOrUj7M.jpg?size=604x453&quality=96&sign=f8ae7223ca0b52390d84a6335ef891d5&type=album",
         eventTitle: "Решка",
         eventDescription: "Выпала Решка!",
-        id: "lghjlghj",
+        id: crypto.randomUUID(),
         checked: true
     },
 ]
@@ -96,7 +97,18 @@ export const HeadsOrTales = [
 export const cardsReducer = (state: DataType[] = initialState, action: CardsReduserActionType) => {
     switch (action.type) {
         case 'SET_CARDS_TO_DEFAULT': {
+            const HREF = window.location.href.split('/')
             localStorage.setItem("dataBase", JSON.stringify(initialState))
+            if ( HREF[HREF.length - 1] === 'main' ) {
+                console.log('222');
+                
+                return JSON.parse(localStorage.getItem("dataBase") || "[]")
+            } else {
+                console.log('333');
+                
+                return state
+            }
+            
             return JSON.parse(localStorage.getItem("dataBase") || "[]")
         }
         case 'DELETE_CARD': {

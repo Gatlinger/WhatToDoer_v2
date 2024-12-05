@@ -61,6 +61,7 @@ export const InstancePage = (props: InstancePagePropsType) => {
                 {cards.map((item, index) => {
                     return (
                         <MyCard
+                            pageVariant={'instance'}
                             id={item.id}
                             pictureUrl={item.pictureUrl}
                             eventTitle={item.eventTitle}

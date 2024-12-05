@@ -105,7 +105,7 @@ const MenuButton = styled.div`
 
 export const AppBarStyled = styled(AppBar)`
     display: flex;
-    position: static;
+    position: sticky;
     flex-direction: row;
     position: relative;
     height: 4rem;

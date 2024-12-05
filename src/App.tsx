@@ -38,6 +38,7 @@ export const RollButtonStyled = styled(Button)`
 export const Box = styled.div`
   width: 45%;
   display: flex;
+  position: fixed;
   flex-direction: column;
   position: static;
   align-items: start;

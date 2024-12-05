@@ -21,6 +21,7 @@ export type MyCardPropsType = {
   checked: boolean;
   checkBoxHandler: (id: string) => void;
   color?: string;
+  pageVariant: 'instance' | 'main' | 'randomCard'
 
 }
 
@@ -46,7 +47,7 @@ export function MyCard(props: MyCardPropsType) {
 
   }
 
- 
+
   return (
     < >
       {doubleClicked === false
@@ -57,11 +58,17 @@ export function MyCard(props: MyCardPropsType) {
           <Picture src={props.pictureUrl} />
           <Text>{props.eventTitle}</Text>
           <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>{props.eventDescription}</TextH2>
-          <ButtonBox>
-            <Checkbox checked={props.checked} size="large" onClick={() => { props.checkBoxHandler(props.id) }} />
 
-            <ButtonStyled id={props.id} theme={'primary'} onClick={deleteCardHandler}>УДАЛИТЬ</ButtonStyled>
-          </ButtonBox>
+          {props.pageVariant === 'main'
+            ? <ButtonBox>
+              <Checkbox checked={props.checked} size="large" onClick={() => { props.checkBoxHandler(props.id) }} />
+
+              <ButtonStyled id={props.id} theme={'primary'} onClick={deleteCardHandler}>УДАЛИТЬ</ButtonStyled>
+            </ButtonBox>
+            : false
+          }
+
+
         </Card>
         : <FormCard
           buttonType={"change_card"}
