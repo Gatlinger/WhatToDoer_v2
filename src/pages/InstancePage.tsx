@@ -48,12 +48,14 @@ export const InstancePage = (props: InstancePagePropsType) => {
         <MainPageWrapper>
             <RollButtonStyled size="large" variant="contained" onClick={ChooseRandomCard}>ROLL RANDOM</RollButtonStyled>
 
-            <AppChoiseBox>
-                <RandomCardComponent
-                    card={choise}
-                    checkBoxHandler={checkBoxHandler}
-                    deleteButtonHandler={deleteButtonHandler} />
-            </AppChoiseBox>
+            {choise.eventDescription && choise.eventTitle
+                ? <AppChoiseBox>
+                    <RandomCardComponent
+                        card={choise || undefined}
+                        checkBoxHandler={checkBoxHandler}
+                        deleteButtonHandler={deleteButtonHandler} />
+                </AppChoiseBox>
+                : false}
 
             <AppMainBox>
                 {cards.map((item, index) => {
