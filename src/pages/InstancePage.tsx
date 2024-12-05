@@ -6,6 +6,7 @@ import { MyCard } from "../components/MyCard"
 import { MainPageWrapper } from "./MainPage"
 import { AppChoiseBox, AppMainBox, RollButtonStyled } from "../App"
 import { RandomCardComponent } from "../components/RandomCardComponent"
+import styled, { keyframes } from "styled-components"
 
 type InstancePagePropsType = {
     instanceId: string
@@ -13,12 +14,18 @@ type InstancePagePropsType = {
 export const InstancePage = (props: InstancePagePropsType) => {
     const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
     const [choise, setChoise] = useState<DataType>({} as DataType)
+    const [shown, setShown] = useState(true)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(InstanseStartAC())
         localStorage.setItem("choisenItem", "{}")
     }, [])
+
+    useEffect(() => {
+        setShown(true)
+      }, [choise])
 
     const checkBoxHandler = (id: string) => {
         dispatch(checkBoxHandlerAC(id))
@@ -29,7 +36,7 @@ export const InstancePage = (props: InstancePagePropsType) => {
     const ChooseRandomCard = () => {
         const filteredArray = cards.filter(e => e.checked === true ? true : false)
         const randomIndex = Math.floor(Math.random() * filteredArray.length)
-
+        setShown(false)
         if (randomIndex === 0 && filteredArray.length === 0) {
             alert("Выберете хотябы одно задание!")
         } else if (randomIndex === 0 && filteredArray.length === 1) {
@@ -48,7 +55,7 @@ export const InstancePage = (props: InstancePagePropsType) => {
         <MainPageWrapper>
             <RollButtonStyled size="large" variant="contained" onClick={ChooseRandomCard}>ROLL RANDOM</RollButtonStyled>
 
-            {choise.eventDescription && choise.eventTitle
+            {choise.eventDescription && choise.eventTitle && shown
                 ? <AppChoiseBox>
                     <RandomCardComponent
                         card={choise || undefined}
@@ -74,4 +81,6 @@ export const InstancePage = (props: InstancePagePropsType) => {
             </AppMainBox>
         </MainPageWrapper>
     )
+    
 }
+

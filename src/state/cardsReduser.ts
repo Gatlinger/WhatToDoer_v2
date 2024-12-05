@@ -100,16 +100,10 @@ export const cardsReducer = (state: DataType[] = initialState, action: CardsRedu
             const HREF = window.location.href.split('/')
             localStorage.setItem("dataBase", JSON.stringify(initialState))
             if ( HREF[HREF.length - 1] === 'main' ) {
-                console.log('222');
-                
                 return JSON.parse(localStorage.getItem("dataBase") || "[]")
             } else {
-                console.log('333');
-                
                 return state
             }
-            
-            return JSON.parse(localStorage.getItem("dataBase") || "[]")
         }
         case 'DELETE_CARD': {
             const newArray = state.filter(card => card.id !== action.id)
@@ -135,8 +129,6 @@ export const cardsReducer = (state: DataType[] = initialState, action: CardsRedu
             return newCardData
         }
         case 'CHANGE_CARD': {
-            console.log('CHANGE_CARD');
-
             let updatedCardData = state.find(e => e.id === action.id)
             if (updatedCardData) {
                 updatedCardData = { ...updatedCardData, pictureUrl: action.URL, eventTitle: action.title, eventDescription: action.Description }
@@ -147,8 +139,6 @@ export const cardsReducer = (state: DataType[] = initialState, action: CardsRedu
             return state
         }
         case 'INSTANCE_START': {
-            console.log("INSTANCE_START");
-            console.log(JSON.parse(localStorage.getItem("dataBase") || "[]"));
             return HeadsOrTales
         }
         case 'MAIN_PAGE_START': {
@@ -169,8 +159,6 @@ export const deleteCardsAC = (id: string): deleteCardActionType => {
 }
 
 export const checkBoxHandlerAC = (id: string): checkBoxHandlerActionType => {
-    console.log('111');
-
     return { type: 'TOGGLE_CHECKBOX', id }
 }
 
@@ -183,11 +171,9 @@ export const ChangeCardAC = (URL: string, title: string, Description: string, id
 }
 
 export const InstanseStartAC = (): InstanseStartActionType => {
-    console.log('InstanseStartAC');
     return { type: 'INSTANCE_START' }
 }
 
 export const MainStartAC = (): MainStartActionType => {
-    console.log('InstanseStartAC');
     return { type: 'MAIN_PAGE_START' }
 }

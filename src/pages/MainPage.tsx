@@ -13,19 +13,27 @@ export const MainPage = () => {
 
   const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
   const [choise, setChoise] = useState<DataType>({} as DataType)
+  const [shown, setShown] = useState(true)
   const dispatch = useDispatch()
   const emptyChoisenItem = {}
 
   useEffect(() => {
     setChoise(emptyChoisenItem as DataType)
     dispatch(MainStartAC())
+    console.log('Effect');
+    
   }, []
   )
+
+  useEffect(() => {
+    setShown(true)
+  }, [choise])
 
 
   const ChooseRandomCard = () => {
     const filteredArray = cards.filter(e => e.checked === true ? true : false)
     const randomIndex = Math.floor(Math.random() * filteredArray.length)
+    setShown(false)
 
     if (randomIndex === 0 && filteredArray.length === 0) {
       alert("Выберете хотябы одно задание!")
@@ -57,7 +65,7 @@ export const MainPage = () => {
     <MainPageWrapper>
       <RollButtonStyled size="large" variant="contained" onClick={ChooseRandomCard}>ROLL RANDOM</RollButtonStyled>
 
-      {choise.eventDescription && choise.eventTitle
+      {choise.eventDescription && choise.eventTitle && shown
         ? <AppChoiseBox>
           <RandomCardComponent
             card={choise || undefined}

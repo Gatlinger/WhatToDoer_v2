@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { checkBoxHandlerAC, DataType, deleteCardsAC } from "../state/cardsReduser"
+import { checkBoxHandlerAC, DataType } from "../state/cardsReduser"
 import { MyCard } from "./MyCard"
 import { AppRootStateType } from "../state/store"
+import styled, { keyframes } from "styled-components"
+import { useEffect } from "react"
+import { Card } from "../componentsFromCard/Card"
 
 type RandomCardComponentPropsType = {
     card: DataType
@@ -11,28 +14,48 @@ type RandomCardComponentPropsType = {
 
 export const RandomCardComponent = (props: RandomCardComponentPropsType) => {
 
+    useEffect(() => {
+
+    }, [props.card])
 
     const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
     const dispatch = useDispatch()
     const checkBoxHandler = (id: string) => {
         dispatch(checkBoxHandlerAC(id))
-      }
+    }
+   
+
 
     return (
-        <div>
-            {props.card.id === "нет" 
-            ? <div></div> 
-            : <MyCard
-            pageVariant={'randomCard'}
-            pictureUrl={props.card.pictureUrl}
-            eventDescription={props.card.eventDescription}
-            eventTitle={props.card.eventTitle}
-            id={props.card.id}
-            checked={props.card.checked}
-            checkBoxHandler={checkBoxHandler}
-            color="yellowgreen"
-        />}
-        </div>
+        <MyCardRandom>
+            {props.card.id === "нет"
+                ? <div></div>
+                : <MyCard
+                    pageVariant={'randomCard'}
+                    pictureUrl={props.card.pictureUrl}
+                    eventDescription={props.card.eventDescription}
+                    eventTitle={props.card.eventTitle}
+                    id={props.card.id}
+                    checked={props.card.checked}
+                    checkBoxHandler={checkBoxHandler}
+                    color="yellowgreen"
+                />}
+        </MyCardRandom>
 
     )
 }
+const opacityChange = keyframes`
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+`
+
+const MyCardRandom = styled(Card) `
+    width: 300px;
+    height: 300px;
+    animation: ${opacityChange} 0.8s linear;
+`
+

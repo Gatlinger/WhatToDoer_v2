@@ -37,14 +37,18 @@ export const FormCard = (props: FormCardPropsType) => {
 
   return (
     <div>
-      {props.buttonType === 'change_card' 
-      ? <div style={{ height: 0 }} onClick={changeHandler}>
-        <CloseButton>
-          <Close style={{ marginLeft: 2, marginTop: 1.5 }} />
-        </CloseButton>
-      </div>
-      : null}
-      
+      {props.buttonType === 'change_card'
+        ? <div style={{ height: 0 }} onClick={() => {
+          if (props.setDoubleClicked) {
+            props.setDoubleClicked(false)
+          }
+        }}>
+          <CloseButton>
+            <Close style={{ marginLeft: 2, marginTop: 1.5 }} />
+          </CloseButton>
+        </div>
+        : null}
+
 
 
       <CardBox>

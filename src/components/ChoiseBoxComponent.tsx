@@ -1,6 +1,7 @@
-import { AppChoiseBox } from "../App"
+import styled, { keyframes } from "styled-components"
 import { DataType } from "../state/cardsReduser"
 import { RandomCardComponent } from "./RandomCardComponent"
+import { AppChoiseBox, AppMainBox } from "../App"
 
 type ChoiseBoxComponentType = {
     choise: DataType,
@@ -18,6 +19,5 @@ export const ChoiseBoxComponent = (props: ChoiseBoxComponentType) => {
         </AppChoiseBox>
     )
 }
-
 
 

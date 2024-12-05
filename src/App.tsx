@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { AppBarComponent, AppBarStyled } from "./components/AppBarComponent";
 import { CardBox } from "./components/MyCard";
 import { Button } from "@mui/material";
@@ -22,8 +22,6 @@ const [instanceName, setInstanceName] = useState('')
         <Route path="WhatToDoer_v2/main" element={<MainPage />} />
         <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
         <Route path={`WhatToDoer_v2/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
-        {/* <MainPage />
-        <ArchivePage /> */}
       </Routes>
     </Box>
   );
@@ -105,6 +103,8 @@ export const AppMainBox = styled(Box)`
   
   
 `
+
 export const AppChoiseBox = styled(AppMainBox)`
   margin-bottom: 100px;
+
 `
