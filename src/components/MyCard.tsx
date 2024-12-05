@@ -27,6 +27,7 @@ export type MyCardPropsType = {
 export function MyCard(props: MyCardPropsType) {
 
   const [doubleClicked, setDoubleClicked] = useState(false)
+  const dispatch = useDispatch()
 
   const onDoubleClickHandler = () => {
     setDoubleClicked((prev => prev = !doubleClicked))
@@ -45,13 +46,13 @@ export function MyCard(props: MyCardPropsType) {
 
   }
 
-  const dispatch = useDispatch()
+ 
   return (
     < >
       {doubleClicked === false
         ? <Card onDoubleClick={onDoubleClickHandler} style={{ backgroundColor: props.color || 'aliceblue' }}>
-          <UpdateButton onClick={() => {setDoubleClicked(true)}}>
-            <Create style={{marginLeft: 2.5, marginTop: 1.5}}/>
+          <UpdateButton onClick={() => { setDoubleClicked(true) }}>
+            <Create style={{ marginLeft: 2.5, marginTop: 1.5 }} />
           </UpdateButton>
           <Picture src={props.pictureUrl} />
           <Text>{props.eventTitle}</Text>
@@ -59,10 +60,12 @@ export function MyCard(props: MyCardPropsType) {
           <ButtonBox>
             <Checkbox checked={props.checked} size="large" onClick={() => { props.checkBoxHandler(props.id) }} />
 
-            <ButtonStyled id={props.id} theme={'outlined'} onClick={deleteCardHandler}>УДАЛИТЬ</ButtonStyled>
+            <ButtonStyled id={props.id} theme={'primary'} onClick={deleteCardHandler}>УДАЛИТЬ</ButtonStyled>
           </ButtonBox>
         </Card>
         : <FormCard
+          buttonType={"change_card"}
+          closeCallBack={onDoubleClickHandler}
           callBack={() => { }}
           URL={props.pictureUrl}
           title={props.eventTitle}
@@ -92,10 +95,12 @@ export const UpdateButton = styled.div`
 
 export const CardBox = styled.div`
     display: flex;
+    position: static;
     height: 100vh;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    
     ButtonStyled + ButtonStyled {
       
     }

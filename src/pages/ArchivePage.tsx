@@ -4,6 +4,7 @@ import { checkBoxHandlerAC, DataType } from "../state/cardsReduser"
 import { CardBox } from "../components/MyCard"
 import styled from "styled-components"
 import { ArchiveCard } from "../components/ArchiveCard"
+import { ArchiveEmptyBlank } from "../components/ArchiveEmptyBlank"
 
 export const ArchivePage = () => {
 
@@ -30,15 +31,7 @@ export const ArchivePage = () => {
               />
             )
           })
-          : <ArchiveCard
-            id={"empty-archive-card"}
-            pictureUrl={"https://i.ytimg.com/vi/L9W4oeEwUSY/maxresdefault.jpg"}
-            eventTitle={"Архив Пуст"}
-            eventDescription={"Архив пока пустует!"}
-            checked={true}
-            checkBoxHandler={checkBoxHandler}
-            color="#FFFFE9"
-          />
+          : <ArchiveEmptyBlank/>
         }
       </CardBox>
     </ArchivePageWrapper>

@@ -8,6 +8,7 @@ import { resetArchiveAC } from "../state/archiveReduser";
 import { NavLink } from "react-router-dom";
 
 type AppBarComponentPropsType = {
+  setInstanceName: (name: string) => void
 }
 
 export const AppBarComponent = (props: AppBarComponentPropsType) => {
@@ -57,16 +58,20 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
         >
           <MenuItem><NavLink to={'/WhatToDoer_v2/main'}><MenuButton>
             Главная Страница
-            </MenuButton></NavLink></MenuItem>
+          </MenuButton></NavLink></MenuItem>
+          <MenuItem><NavLink to={'WhatToDoer_v2/HeadsOrTales'}><MenuButton onClick={() => props.setInstanceName('HeadsOrTales')}>
+            Орел и Решка
+          </MenuButton></NavLink></MenuItem>
           <MenuItem><NavLink to={'WhatToDoer_v2/archive'}><MenuButton>
             Страница Архива
-            </MenuButton></NavLink></MenuItem>
+          </MenuButton></NavLink></MenuItem>
+          
           <MenuItem style={{ marginTop: 50 }} onClick={defaultButtonHandler}><MenuButton>
             Сбросить Занятия
-            </MenuButton></MenuItem>
+          </MenuButton></MenuItem>
           <MenuItem onClick={deleteDefaultButtonHandler}><MenuButton>
             Сбросить Архив
-            </MenuButton></MenuItem>
+          </MenuButton></MenuItem>
         </Menu>
 
         <H1Styled>WhatToDoer_v2</H1Styled>
@@ -75,7 +80,7 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
   )
 }
 
-const MenuButton = styled.div `
+const MenuButton = styled.div`
   width:170px;
   text-align: center;
   color: black;

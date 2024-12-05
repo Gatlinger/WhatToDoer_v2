@@ -5,27 +5,21 @@ import { MyCard } from "../components/MyCard"
 import { RandomCardComponent } from "../components/RandomCardComponent"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux";
-import { AddCardAC, checkBoxHandlerAC, DataType, deleteCardsAC } from "../state/cardsReduser"
+import { AddCardAC, checkBoxHandlerAC, DataType, deleteCardsAC, MainStartAC } from "../state/cardsReduser"
 import { AppRootStateType } from "../state/store"
 
 export const MainPage = () => {
 
 
   const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
-  const dispatch = useDispatch()
-
   const [choise, setChoise] = useState<DataType>({} as DataType)
+  const dispatch = useDispatch()
+  const emptyChoisenItem = {}
 
   useEffect(() => {
-    localStorage.setItem("dataBase", JSON.stringify(cards))
-    setChoise(
-      {
-      pictureUrl: "https://i.ytimg.com/vi/L9W4oeEwUSY/maxresdefault.jpg",
-      eventTitle: 'Ничего',
-      eventDescription: "Нароль уже чего нибудь!",
-      id: 'нет'
-    } as DataType)
-  }, [cards]
+    setChoise(emptyChoisenItem as DataType)
+    dispatch(MainStartAC())
+  }, []
   )
 
 
@@ -36,15 +30,15 @@ export const MainPage = () => {
     if (randomIndex === 0 && filteredArray.length === 0) {
       alert("Выберете хотябы одно задание!")
     } else if (randomIndex === 0 && filteredArray.length === 1) {
+      localStorage.setItem("choisenItem", JSON.stringify(filteredArray[0]))
       setChoise(filteredArray[0])
-      localStorage.setItem("choisenItem", JSON.stringify(choise))
     } else if (filteredArray[randomIndex].id !== choise.id && filteredArray.length > 1) {
+      localStorage.setItem("choisenItem", JSON.stringify(filteredArray[randomIndex]))
       setChoise(filteredArray[randomIndex])
-      localStorage.setItem("choisenItem", JSON.stringify(choise))
     } else {
       ChooseRandomCard()
     }
-    
+
   }
 
   const deleteButtonHandler = (id: string) => {
@@ -70,6 +64,8 @@ export const MainPage = () => {
           deleteButtonHandler={deleteButtonHandler} />
       </AppChoiseBox>
 
+
+
       <AppMainBox>
         {cards.map((item, index) => {
           return (
@@ -83,7 +79,7 @@ export const MainPage = () => {
             />
           )
         })}
-        <FormCard callBack={addNewCard} id=""/>
+        <FormCard callBack={addNewCard} id="" />
       </AppMainBox>
     </MainPageWrapper>
   )

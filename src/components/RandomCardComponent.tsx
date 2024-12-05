@@ -20,7 +20,9 @@ export const RandomCardComponent = (props: RandomCardComponentPropsType) => {
 
     return (
         <div>
-            {props.card.id === "нет" ? <div></div> : <MyCard
+            {props.card.id === "нет" 
+            ? <div></div> 
+            : <MyCard
             pictureUrl={props.card.pictureUrl}
             eventDescription={props.card.eventDescription}
             eventTitle={props.card.eventTitle}

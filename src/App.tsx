@@ -5,18 +5,23 @@ import { Button } from "@mui/material";
 import { MainPage } from "./pages/MainPage";
 import { ArchivePage, ArchivePageWrapper } from "./pages/ArchivePage";
 import { Route, Routes } from "react-router-dom";
+import { InstancePage } from "./pages/InstancePage";
+import { useState } from "react";
 
 
 
 
 function App() {
+const [instanceName, setInstanceName] = useState('')
+
   return (
     <Box>
-      <AppBarComponent />
+      <AppBarComponent setInstanceName={setInstanceName}/>
       <Routes>
         <Route path="WhatToDoer_v2/" element={<MainPage />} />
         <Route path="WhatToDoer_v2/main" element={<MainPage />} />
         <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
+        <Route path={`WhatToDoer_v2/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
         {/* <MainPage />
         <ArchivePage /> */}
       </Routes>
@@ -25,8 +30,6 @@ function App() {
 }
 
 export default App;
-
-
 
 export const RollButtonStyled = styled(Button)`
     

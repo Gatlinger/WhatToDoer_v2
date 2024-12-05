@@ -60,7 +60,7 @@ export const ArchiveCard = (props: ArchiveCardPropsType) => {
 }
 
 
-const ReturnButtonBox = styled.div`
+export const ReturnButtonBox = styled.div`
     display: flex;
     justify-content: center;
 
@@ -70,6 +70,6 @@ const ReturnButtonBox = styled.div`
     }
   `
 
-const DeleteButton = styled(UpdateButton)`
+export const DeleteButton = styled(UpdateButton)`
     background-color: #f52b2b;
   `
