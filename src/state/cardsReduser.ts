@@ -1,8 +1,6 @@
-import { Console } from "console";
 import CowJam from "../images/CowJam.gif";
 import LionPic from "../images/i.webp";
 import WorkPic from "../images/Работа.gif"
-import { randomUUID } from "crypto";
 
 export type DataType = {
     pictureUrl: string

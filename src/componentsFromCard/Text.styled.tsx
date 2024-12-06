@@ -5,15 +5,10 @@ export const Text = styled.h1 `
     height: 19px;
     margin-left: 20px;
     gap: 0px;
-    opacity: 0px;
     color: ${props => props.color || 'black'};
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    font-weight: 700;
-    line-height: 19.36px;
     text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
     bottom: 12px
 
 

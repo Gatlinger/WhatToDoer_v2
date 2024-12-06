@@ -6,7 +6,6 @@ import { MyCard } from "../components/MyCard"
 import { MainPageWrapper } from "./MainPage"
 import { AppChoiseBox, AppMainBox, RollButtonStyled } from "../App"
 import { RandomCardComponent } from "../components/RandomCardComponent"
-import styled, { keyframes } from "styled-components"
 
 type InstancePagePropsType = {
     instanceId: string

@@ -25,14 +25,6 @@ export const ArchiveCard = (props: ArchiveCardPropsType) => {
     const dispatch = useDispatch()
 
     const returnCardHandler = (id: string) => {
-
-        const cardToAdd = {
-            id: props.id,
-            pictureUrl: props.pictureUrl,
-            eventTitle: props.eventTitle,
-            eventDescription: props.eventDescription,
-            checked: true,
-        }
         dispatch(returnCardAC(props.id))
         dispatch(AddCardAC(props.pictureUrl, props.eventTitle, props.eventDescription))
     }

@@ -1,4 +1,3 @@
-import styled, { keyframes } from "styled-components";
 import { AppBarComponent, AppBarStyled } from "./components/AppBarComponent";
 import { CardBox } from "./components/MyCard";
 import { Button } from "@mui/material";
@@ -7,6 +6,7 @@ import { ArchivePage, ArchivePageWrapper } from "./pages/ArchivePage";
 import { Route, Routes } from "react-router-dom";
 import { InstancePage } from "./pages/InstancePage";
 import { useState } from "react";
+import styled from "styled-components";
 
 
 
@@ -73,6 +73,7 @@ export const Box = styled.div`
     margin: 60px 0px 60px 0px;
     justify-self: center;
     align-self: center;
+  font-family: 'Jaro';
   }
 
   @media screen and (max-width: 576px){

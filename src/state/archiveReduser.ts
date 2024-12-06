@@ -42,7 +42,6 @@ export const archiveReduser = (state: DataType[] = initialState, action: archive
             return initialState
         }
         case 'RETORN_CARD_TO_MAIN': {
-            const cardToReturn = state.find(card => card.id === action.id)
             const newArray = state.filter(e => e.id !== action.id)
             localStorage.setItem('archiveStorage', JSON.stringify(newArray))
             return newArray

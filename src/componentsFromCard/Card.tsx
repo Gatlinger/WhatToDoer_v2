@@ -1,14 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-const rotate = keyframes`
-    from {
-        opacity: 0;
-        scale: 0.3;
-    }
-    to {
-        opacity: 1;
-    }
-`
+import styled from "styled-components";
 
 export const Card = styled.div `
     width: 300px;

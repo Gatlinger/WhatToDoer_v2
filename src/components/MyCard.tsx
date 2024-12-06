@@ -6,7 +6,7 @@ import { Text } from "../componentsFromCard/Text.styled";
 import { TextH2 } from "../componentsFromCard/TextH2.styled";
 import { Checkbox } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { AddCardAC, deleteCardsAC } from "../state/cardsReduser";
+import { deleteCardsAC } from "../state/cardsReduser";
 import { useState } from "react";
 import { FormCard } from "./FormCard";
 import { archiveCardAC } from "../state/archiveReduser";

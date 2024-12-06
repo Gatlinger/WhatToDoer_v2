@@ -1,9 +1,8 @@
 import styled from "styled-components"
 import { AppBar, Button, Menu, MenuItem, Toolbar } from "@mui/material"
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { DataType, resetCardsAC } from "../state/cardsReduser";
-import { AppRootStateType } from "../state/store";
+import { useDispatch } from "react-redux";
+import { resetCardsAC } from "../state/cardsReduser";
 import { resetArchiveAC } from "../state/archiveReduser";
 import { NavLink } from "react-router-dom";
 
@@ -13,7 +12,6 @@ type AppBarComponentPropsType = {
 
 export const AppBarComponent = (props: AppBarComponentPropsType) => {
 
-  const cards = useSelector<AppRootStateType, DataType[]>(state => state.cards)
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -42,9 +40,9 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
           variant="contained"
-          style={{ background: "white", color: "black", fontFamily: 'Arial, Helvetica, sans-serif' }}
+          style={{ background: "white", color: "black", fontFamily: 'Jaro' }}
         >
-          MENU
+          MENU 
         </Button>
 
         <Menu
@@ -84,15 +82,9 @@ const MenuButton = styled.div`
   width:170px;
   text-align: center;
   color: black;
-  font-family: Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-size: auto;
-  font-weight: 300;
-  text-decoration: none;
   padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
-  text-decoration: none;
   cursor: pointer;
   transition: background-color 0.5s ease;
   box-shadow: 3px 1px 10px   #2f3136;
@@ -126,12 +118,10 @@ const ToolbarStyled = styled(Toolbar)`
 `
 
 export const H1Styled = styled.h1`
-  font-size: 40px;
   position: relative;
   text-align: end;
   justify-self: end;
   margin-right: 5px;
   text-shadow: 3px 1px 10px   #2f3136;
-  font-weight: 300;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Jaro';
 `
