@@ -31,7 +31,8 @@ export const archiveReduser = (state: DataType[] = initialState, action: archive
                     eventTitle: action.card.eventTitle,
                     eventDescription: action.card.eventDescription,
                     id: action.card.id,
-                    checked: false
+                    checked: false,
+                    backgroundColor: action.card.backgroundColor
                 }
                 console.log([archivedCard, ...state]);
                 localStorage.setItem('archiveStorage', JSON.stringify([archivedCard, ...state]))

@@ -8,6 +8,7 @@ export type DataType = {
     eventDescription: string
     id: string
     checked: boolean
+    backgroundColor?: string
 }
 
 type deleteCardActionType = {
@@ -114,13 +115,16 @@ export const cardsReducer = (state: DataType[] = initialState, action: CardsRedu
             return newArray
         }
         case 'ADD_NEW_CARD': {
+
+            const color = "#" + Math.floor(Math.random()*16777215).toString(16);
             const newCardData = [...state,
             {
                 pictureUrl: action.URL,
                 eventTitle: action.title,
                 eventDescription: action.Description,
                 id: crypto.randomUUID(),
-                checked: true
+                checked: true,
+                backgroundColor: color
             }
             ]
             localStorage.setItem("dataBase", JSON.stringify(newCardData))

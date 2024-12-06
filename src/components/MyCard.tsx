@@ -22,7 +22,7 @@ export type MyCardPropsType = {
   checkBoxHandler: (id: string) => void;
   color?: string;
   pageVariant: 'instance' | 'main' | 'randomCard'
-
+  backgroundColor?: string
 }
 
 export function MyCard(props: MyCardPropsType) {
@@ -40,7 +40,8 @@ export function MyCard(props: MyCardPropsType) {
       eventTitle: props.eventTitle,
       eventDescription: props.eventDescription,
       id: props.id,
-      checked: true
+      checked: true,
+      backgroundColor: props.backgroundColor
     }
     dispatch(archiveCardAC(deletedCard))
     dispatch(deleteCardsAC(props.id))
@@ -55,7 +56,7 @@ export function MyCard(props: MyCardPropsType) {
           <UpdateButton onClick={() => { setDoubleClicked(true) }}>
             <Create style={{ marginLeft: 2.5, marginTop: 1.5 }} />
           </UpdateButton>
-          <Picture src={props.pictureUrl} />
+          <Picture content='' src={props.pictureUrl} style={{backgroundColor: props.backgroundColor}}/>
           <Text>{props.eventTitle}</Text>
           <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>{props.eventDescription}</TextH2>
 
@@ -107,7 +108,7 @@ export const CardBox = styled.div`
     justify-content: center;
     align-items: center;
     gap: 15px;
-    
+
     ButtonStyled + ButtonStyled {
       
     }

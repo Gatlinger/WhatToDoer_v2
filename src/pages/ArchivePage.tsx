@@ -27,6 +27,7 @@ export const ArchivePage = () => {
                 eventDescription={item.eventDescription}
                 checked={item.checked}
                 checkBoxHandler={checkBoxHandler}
+                backgroundColor={item.backgroundColor}
                 color="#FFFFE9"
               />
             )
@@ -46,13 +47,12 @@ export const ArchivePageWrapper = styled.div`
   align-items: start;
   justify-self: center;
   justify-content: center;
-  gap: 10px;
+  padding-top: 20px;
 
   ${CardBox} {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-items: start;
     justify-self: center;
     justify-content: center;
   }

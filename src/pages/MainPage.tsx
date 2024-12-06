@@ -89,6 +89,7 @@ export const MainPage = () => {
               eventDescription={item.eventDescription}
               checked={item.checked}
               checkBoxHandler={checkBoxHandler}
+              backgroundColor={item.backgroundColor}
             />
           )
         })}

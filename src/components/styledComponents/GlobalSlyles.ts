@@ -26,7 +26,6 @@ font-style: normal;
 font-display: swap;
 }
 
-
 @font-face {    
 font-family: 'Hand Writing Cyr';
 src: local('Hand Writing Cyr') url('./fonts/Hand Writing Cyr/HandWriting_1.otf') format('opentype');

@@ -18,6 +18,7 @@ export type ArchiveCardPropsType = {
     checked: boolean;
     checkBoxHandler: (id: string) => void;
     color?: string;
+    backgroundColor?: string;
 }
 
 export const ArchiveCard = (props: ArchiveCardPropsType) => {
@@ -38,7 +39,7 @@ export const ArchiveCard = (props: ArchiveCardPropsType) => {
             <DeleteButton onClick={deleteArchiveCardHandler}>
                 <Delete style={{marginLeft: 2.5, marginTop: 1.5}}/>
             </DeleteButton>
-            <Picture src={props.pictureUrl} style={{}} />
+            <Picture src={props.pictureUrl} style={{backgroundColor: props.backgroundColor}} />
             <Text>{props.eventTitle}</Text>
             <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "black" }}>{props.eventDescription}</TextH2>
             <ReturnButtonBox>
