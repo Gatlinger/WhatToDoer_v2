@@ -9,6 +9,13 @@ export type BookType = {
 
 }
 
+type getBookActionType = {
+    type: 'GET_ONE_BOOK'
+    book: any
+}
+
+type BookShelfActionType = getBookActionType
+
 const BookShelfInitialState = [
     {
         id: '1',
@@ -24,15 +31,29 @@ const BookShelfInitialState = [
         author: 'Author 2',
         description: 'Description 2'
     },
-    
- ] as BookShelfType;  // Initialize the state with the initial books list
+
+] as BookShelfType;
 
 
 
-export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, action: any) => {
-    switch(action.type) {
+export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, action: BookShelfActionType) => {
+    switch (action.type) {
+        case 'GET_ONE_BOOK': {
+            const newBook = {
+                id: '2345',
+                pictureUrl: '',
+                title: action.book.totalItems,
+                author: '11123',
+                description: '3262346236',
+            }
+            return [newBook]
+        }
         default: {
             return state;
         }
     }
+}
+
+export const getBookAC = (book: BookType) => {
+    return { type: "GET_ONE_BOOK", book }
 }
