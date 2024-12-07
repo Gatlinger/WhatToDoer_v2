@@ -1,6 +1,7 @@
 import { combineReducers, createStore } from "redux"
 import { cardsReducer } from "./cardsReduser"
 import { archiveReduser } from "./archiveReduser"
+import { bookShelfReduser } from "./bookSelfReduser"
 
 // export const store = configureStore({
 //   reducer: {
@@ -17,7 +18,8 @@ import { archiveReduser } from "./archiveReduser"
 
 const rootReducer = combineReducers({
   cards: cardsReducer,
-  archive: archiveReduser
+  archive: archiveReduser,
+  bookshelf: bookShelfReduser
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>

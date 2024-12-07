@@ -60,10 +60,13 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
           <MenuItem><NavLink to={'WhatToDoer_v2/HeadsOrTales'}><MenuButton onClick={() => props.setInstanceName('HeadsOrTales')}>
             Орел и Решка
           </MenuButton></NavLink></MenuItem>
+          <MenuItem><NavLink to={'WhatToDoer_v2/BookSelf'}><MenuButton>
+            Книжная полка
+          </MenuButton></NavLink></MenuItem>
           <MenuItem><NavLink to={'WhatToDoer_v2/archive'}><MenuButton>
             Страница Архива
           </MenuButton></NavLink></MenuItem>
-          
+
           <MenuItem style={{ marginTop: 50 }} onClick={defaultButtonHandler}><MenuButton>
             Сбросить Занятия
           </MenuButton></MenuItem>

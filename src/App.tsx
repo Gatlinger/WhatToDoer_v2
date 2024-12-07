@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import { InstancePage } from "./pages/InstancePage";
 import { useState } from "react";
 import styled from "styled-components";
+import { BookShelfPage } from "./pages/BookShelfPage";
 
 
 
@@ -22,6 +23,7 @@ const [instanceName, setInstanceName] = useState('')
         <Route path="WhatToDoer_v2/main" element={<MainPage />} />
         <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
         <Route path={`WhatToDoer_v2/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
+        <Route path={`WhatToDoer_v2/BookSelf`} element={<BookShelfPage/>} />
       </Routes>
     </Box>
   );

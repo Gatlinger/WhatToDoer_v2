@@ -18,7 +18,8 @@ export type MyCardPropsType = {
   eventTitle: string;
   eventDescription: string;
   id: string;
-  checked: boolean;
+  author?: string;
+  checked?: boolean;
   checkBoxHandler: (id: string) => void;
   color?: string;
   pageVariant: 'instance' | 'main' | 'randomCard'
@@ -56,9 +57,13 @@ export function MyCard(props: MyCardPropsType) {
           <UpdateButton onClick={() => { setDoubleClicked(true) }}>
             <Create style={{ marginLeft: 2.5, marginTop: 1.5 }} />
           </UpdateButton>
-          <Picture content='' src={props.pictureUrl} style={{backgroundColor: props.backgroundColor}}/>
-          <Text>{props.eventTitle}</Text>
-          <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>{props.eventDescription}</TextH2>
+          <Picture content='' src={props.pictureUrl} style={{ backgroundColor: props.backgroundColor }} />
+          <Text>
+            {props.eventTitle}
+          </Text>
+          <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>
+            {props.author ? props.author : props.eventDescription}
+          </TextH2>
 
           {props.pageVariant === 'main'
             ? <ButtonBox>
