@@ -40,11 +40,11 @@ export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, a
     switch (action.type) {
         case 'GET_ONE_BOOK': {
             const newBook = {
-                id: '2345',
-                pictureUrl: '',
-                title: action.book.totalItems,
-                author: '11123',
-                description: '3262346236',
+                id: action.book.id,
+                pictureUrl: action.book.pictureUrl,
+                title: action.book.title,
+                author: action.book.author,
+                description: action.book.description
             }
             return [newBook]
         }

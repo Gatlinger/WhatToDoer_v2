@@ -24,6 +24,7 @@ export type MyCardPropsType = {
   color?: string;
   pageVariant: 'instance' | 'main' | 'randomCard'
   backgroundColor?: string
+  bookDescription?: string
 }
 
 export function MyCard(props: MyCardPropsType) {
@@ -63,6 +64,9 @@ export function MyCard(props: MyCardPropsType) {
           </Text>
           <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>
             {props.author ? props.author : props.eventDescription}
+          </TextH2>
+          <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>
+            {props.author ? props.bookDescription : false}
           </TextH2>
 
           {props.pageVariant === 'main'

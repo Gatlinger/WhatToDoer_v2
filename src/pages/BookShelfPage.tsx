@@ -20,14 +20,25 @@ export const BookShelfPage = () => {
     }, [book])
 
     const getNewBook = () => {
-        const newBook = axios('https://www.googleapis.com/books/v1/volumes?q=fencing').then(res => setBook(res.data))
-        setBook(newBook)
+        const newBook = axios('https://www.googleapis.com/books/v1/volumes?q=fencing')
+        .then(res => {
+            const book = {
+                id: res.data.items[0].id,
+                title: res.data.items[0].volumeInfo.title,
+                author: res.data.items[0].volumeInfo.authors[0],
+                description: res.data.items[0].volumeInfo.description,
+                pictureUrl: res.data.items[0].volumeInfo.imageLinks?.thumbnail,
+            }
+            setBook(book)}
+        )
+        setBook(book)
     }
 
     return (
         <BookShelfPageWrapper>
-
+            <RollButtonWrapper>
             <RollButtonStyled size="large" variant="contained" onClick={getNewBook}>ROLL RANDOM</RollButtonStyled>
+            </RollButtonWrapper>
 
             <AppMainBox>
                 {bookshelf.map((item, index) => {
@@ -39,6 +50,7 @@ export const BookShelfPage = () => {
                             pictureUrl={item.pictureUrl}
                             eventTitle={item.title}
                             eventDescription={item.description}
+                            bookDescription={item.description}
                             checkBoxHandler={checkBoxHandler}
                         />
                     )
@@ -49,8 +61,17 @@ export const BookShelfPage = () => {
 }
 
 const BookShelfPageWrapper = styled.div`
+display: flex;
+flex-direction: column;
 width: 100%;
 align-items: center;
 justify-content: center;
 
+`
+
+const RollButtonWrapper = styled.div`
+display: flex;
+width: 100%;
+align-items: center;
+justify-content: center;
 `

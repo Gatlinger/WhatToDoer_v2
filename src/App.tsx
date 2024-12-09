@@ -75,7 +75,7 @@ export const Box = styled.div`
     margin: 60px 0px 60px 0px;
     justify-self: center;
     align-self: center;
-  font-family: 'Jaro';
+    font-family: 'Jaro';
   }
 
   @media screen and (max-width: 576px){
