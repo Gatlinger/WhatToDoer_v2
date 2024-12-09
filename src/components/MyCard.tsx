@@ -65,7 +65,7 @@ export function MyCard(props: MyCardPropsType) {
           <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>
             {props.author ? props.author : props.eventDescription}
           </TextH2>
-          <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA" }}>
+          <TextH2 style={{ color: props.color === "yellowgreen" ? "black" : "ABB3BA", display: props.author ? "flex" : "none" }}>
             {props.author ? props.bookDescription : false}
           </TextH2>
 
