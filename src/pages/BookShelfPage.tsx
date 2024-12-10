@@ -7,6 +7,7 @@ import { BookShelfType, BookType, getBookAC } from "../state/bookSelfReduser"
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { MyBookCard } from "../components/MyBookCard"
 
 export const BookShelfPage = () => {
     const bookshelf = useSelector<AppRootStateType, BookShelfType>(state => state.bookshelf)
@@ -21,38 +22,34 @@ export const BookShelfPage = () => {
 
     const getNewBook = () => {
         const newBook = axios('https://www.googleapis.com/books/v1/volumes?q=fencing')
-        .then(res => {
-            const book = {
-                id: res.data.items[0].id,
-                title: res.data.items[0].volumeInfo.title,
-                author: res.data.items[0].volumeInfo.authors[0],
-                description: res.data.items[0].volumeInfo.description,
-                pictureUrl: res.data.items[0].volumeInfo.imageLinks?.thumbnail,
+            .then(res => {
+                const book = {
+                    id: res.data.items[0].id,
+                    title: res.data.items[0].volumeInfo.title,
+                    author: res.data.items[0].volumeInfo.authors[0],
+                    description: res.data.items[0].volumeInfo.description,
+                    pictureUrl: res.data.items[0].volumeInfo.imageLinks?.thumbnail,
+                }
+                setBook(book)
             }
-            setBook(book)}
-        )
+            )
         setBook(book)
     }
 
     return (
         <BookShelfPageWrapper>
             <RollButtonWrapper>
-            <RollButtonStyled size="large" variant="contained" onClick={getNewBook}>ROLL RANDOM</RollButtonStyled>
+                <RollButtonStyled size="large" variant="contained" onClick={getNewBook}>ROLL RANDOM</RollButtonStyled>
             </RollButtonWrapper>
 
             <AppMainBox>
                 {bookshelf.map((item, index) => {
                     return (
-                        <MyCard
-                            pageVariant={'instance'}
-                            id={item.id}
-                            author={item.author}
-                            pictureUrl={item.pictureUrl}
-                            eventTitle={item.title}
-                            eventDescription={item.description}
-                            bookDescription={item.description}
-                            checkBoxHandler={checkBoxHandler}
-                        />
+                        <MyBookCard
+                            BookCover={item.pictureUrl}
+                            BookAuthor={item.author}
+                            BookTitle={item.title}
+                            BookDescription={item.description} />
                     )
                 })}
             </AppMainBox>

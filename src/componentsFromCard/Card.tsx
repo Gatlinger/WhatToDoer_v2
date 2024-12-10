@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const Card = styled.div `
+export const Card = styled.div`
     width: 300px;
     height: 350px;
     color: white;
     border-radius: 15px;
     box-shadow: 3px 3px 10px   #2f3136;
+    padding-bottom: 10px;
 
     
     &:hover {

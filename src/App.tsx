@@ -23,7 +23,7 @@ const [instanceName, setInstanceName] = useState('')
         <Route path="WhatToDoer_v2/main" element={<MainPage />} />
         <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
         <Route path={`WhatToDoer_v2/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
-        <Route path={`WhatToDoer_v2/BookSelf`} element={<BookShelfPage/>} />
+        <Route path={`WhatToDoer_v2/BookShelf`} element={<BookShelfPage/>} />
       </Routes>
     </Box>
   );
