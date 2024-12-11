@@ -5,7 +5,7 @@ type MyBookCardPropsType = {
     BookCover: string
     BookTitle: string
     BookAuthor: string
-    BookDescription: string
+    BookDescription?: string
 }
 
 
@@ -26,6 +26,7 @@ export const BookCard = styled.div`
     color: black;
     box-shadow: 3px 3px 10px   #2f3136;
     padding-bottom: 10px;
+    border-radius: 10px;
     
     h2 {
         font-size: 24px;

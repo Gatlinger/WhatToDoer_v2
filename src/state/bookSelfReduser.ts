@@ -5,16 +5,31 @@ export type BookType = {
     pictureUrl: string
     title: string
     author: string
-    description: string
-
+    description?: string
+}
+export type VolumeInfo = {
+    title: string;
+    authors: string[];
+    description?: string; // Может быть неопределенным
+    imageLinks?: {
+        thumbnail?: string; // Может быть неопределенным
+    };
+}
+export type BookItem = {
+    id: string;
+    volumeInfo: VolumeInfo;
 }
 
-type getBookActionType = {
+export type getBookActionType = {
     type: 'GET_ONE_BOOK'
     book: any
 }
+export type getPageBooksActionType = {
+    type: 'GET_PAGE_BOOKS'
+    books: BookType[]
+}
 
-type BookShelfActionType = getBookActionType
+type BookShelfActionType = getBookActionType | getPageBooksActionType
 
 const BookShelfInitialState = [
     {
@@ -32,11 +47,11 @@ const BookShelfInitialState = [
         description: 'Description 2'
     },
 
-] as BookShelfType;
+]
 
 
 
-export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, action: BookShelfActionType) => {
+export const bookShelfReduser = (state: BookType[] = BookShelfInitialState, action: BookShelfActionType) => {
     switch (action.type) {
         case 'GET_ONE_BOOK': {
             const newBook = {
@@ -48,6 +63,9 @@ export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, a
             }
             return [newBook]
         }
+        case 'GET_PAGE_BOOKS': {
+            return state
+        }
         default: {
             return state;
         }
@@ -56,4 +74,8 @@ export const bookShelfReduser = (state: BookShelfType = BookShelfInitialState, a
 
 export const getBookAC = (book: BookType) => {
     return { type: "GET_ONE_BOOK", book }
+}
+
+export const getBooksAC = (books: BookType[]) => {
+    return { type: "GET_PAGE_BOOKS", books }
 }
