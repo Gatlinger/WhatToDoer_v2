@@ -38,40 +38,68 @@ export const BookShelfPage = () => {
     //     setBook(book)
     // }
 
+
+
+    //----------------------------------------------------------------
+
+
+    // const getNewPage = async (page: number) => {
+    //     const startIndex = page * resultsPerPage
+    //     const response = await axios(`https://www.googleapis.com/books/v1/volumes?q=fencing&startIndex=${startIndex}&maxResults=${resultsPerPage}`)
+    //         .then(res => {
+
+
+    //             const book = res.data.items[0]
+    //             const booksArray = res.data.items.map((book: any) => {
+    //                 console.log("Book: " + book);
+    //                 return {
+    //                     id: book.id,
+    //                     pictureUrl: book.volumeInfo.imageLinks?.thumbnail || '',
+    //                     title: book.volumeInfo.title,
+    //                     author: book.volumeInfo.authors,
+    //                     description: book.volumeInfo.description
+    //                 }
+    //             })
+
+
+    //             console.log('book: ' + book);
+    //             console.log('booksArray: ' + booksArray);
+
+    //             setBooks(booksArray)
+    //         })
+    // }
+    // console.log('Полка: ' + bookshelf);
+
+
+    //----------------------------------------------------------------
+
+    let booksArray: any = []
     const getNewPage = async (page: number) => {
-        const startIndex = page * resultsPerPage
-        const response = await axios(`https://www.googleapis.com/books/v1/volumes?q=fencing&startIndex=${startIndex}&maxResults=${resultsPerPage}`)
-            .then(res => {
+        const startIndex = page * resultsPerPage;
 
-                
-                
-                // const booksArray = res.data.items.map((book: any) => {
-                //     console.log("Book: " + book);
-                //     return {
-                //         id: book.id,
-                //         pictureUrl: book.volumeInfo.imageLinks?.thumbnail || '',
-                //         title: book.volumeInfo.title,
-                //         author: book.volumeInfo.authors,
-                //         description: book.volumeInfo.description
-                //     }
-                // })
+        try {
+            const response = await axios(`https://www.googleapis.com/books/v1/volumes?q=fencing&startIndex=${startIndex}&maxResults=${resultsPerPage}`)
+                .then(res => {
+                    if (Array.isArray(res.data.items)) {
+                        booksArray = res.data.items.map((book: any) => {
+                            console.log("Book: ", book); // Логируем каждую книгу
+                            return {
+                                id: book.id,
+                                pictureUrl: book.volumeInfo.imageLinks.thumbnail,
+                                title: book.volumeInfo.title,
+                                author: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Неизвестный автор', // Объединяем авторов в строку
+                                description: book.volumeInfo.description,
+                            };
+                        });
 
-
-
-                // console.log('booksArray: ' + booksArray);
-                
-                // setBooks(booksArray)
-            })
-    }
-    console.log('Полка: ' + bookshelf);
-
-    // action.books.map((book: BookItem) => { return {
-    //     id: book.id,
-    //     pictureUrl: book.volumeInfo.imageLinks?.thumbnail || '',
-    //     title: book.volumeInfo.title,
-    //     author: book.volumeInfo.authors.join(','),
-    //     description: book.volumeInfo.description
-    // }})
+                    }
+                }
+                )
+            setBooks(booksArray); // Устанавливаем состояние  
+        } catch (error) {
+            console.error('Error fetching books:', error);
+        }
+    };
 
 
 
@@ -82,21 +110,12 @@ export const BookShelfPage = () => {
             </RollButtonWrapper>
 
             <AppMainBox>
-                {/* {bookshelf.map((item, index) => {
-                    return (
-                        <MyBookCard
-                            BookCover={item.pictureUrl}
-                            BookAuthor={item.author}
-                            BookTitle={item.title}
-                            BookDescription={item.description} />
-                    )
-                })} */}
-
-                {bookshelf.map((item) => <MyBookCard
-                            BookCover={item.pictureUrl}
-                            BookAuthor={item.author}
-                            BookTitle={item.title}
-                            BookDescription={item.description} />
+                {bookshelf.map((item) =>
+                    <MyBookCard
+                        BookCover={item.pictureUrl}
+                        BookAuthor={item.author}
+                        BookTitle={item.title}
+                        BookDescription={item.description} />
                 )
                 }
             </AppMainBox>
