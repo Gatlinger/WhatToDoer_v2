@@ -64,18 +64,14 @@ export const bookShelfReduser = (state: BookType[] = BookShelfInitialState, acti
             return [newBook]
         }
         case 'GET_PAGE_BOOKS': {
-            console.log('Action.books: ', action.books);
             let newState: BookType[] = []
             Array.isArray(action.books) 
             ? newState = action.books
             : newState = state
-            console.log('newState: ', newState);
             
             return newState
         }
         default: {
-            console.log('State: ', state);
-            
             return state;
         }
     }

@@ -14,7 +14,7 @@ export const MyBookCard = (props: MyBookCardPropsType) => {
         <BookCard style={{ display: props.BookAuthor ? 'flex' : 'none' }}>
             <BookCover src={props.BookCover}/>
             <h2>{props.BookTitle}</h2>
-            <p>Author: {props.BookAuthor}</p>
+            <p>Автор: {props.BookAuthor}</p>
         </BookCard>
     )
 }
