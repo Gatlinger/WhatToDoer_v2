@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import { BookCover } from "./BookPicture"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 type MyBookCardPropsType = {
+    BookId: string
     BookCover: string
     BookTitle: string
     BookAuthor: string
@@ -9,13 +12,26 @@ type MyBookCardPropsType = {
 }
 
 
+
 export const MyBookCard = (props: MyBookCardPropsType) => {
+
+    const navigate = useNavigate()
+
+    const handleDoubleClick = (adress: string) => {
+        navigate(adress)
+    }
+
     return (
-        <BookCard style={{ display: props.BookAuthor ? 'flex' : 'none' }}>
-            <BookCover src={props.BookCover}/>
-            <h2>{props.BookTitle}</h2>
-            <p>Автор: {props.BookAuthor}</p>
-        </BookCard>
+        <Link style={{textDecoration:'none'}} to={`/BookShelf/SingleCardPage/${props.BookId}`}>
+            <BookCard
+                style={{ display: props.BookAuthor ? 'flex' : 'none' }}
+                // onDoubleClick={() => { handleDoubleClick('../WhatToDoer_v2/main') }}
+                >
+                <BookCover src={props.BookCover} />
+                <h2>{props.BookTitle}</h2>
+                <p>Автор: {props.BookAuthor}</p>
+            </BookCard>
+        </Link>
     )
 }
 

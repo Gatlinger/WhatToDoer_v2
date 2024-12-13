@@ -3,11 +3,12 @@ import { CardBox } from "./components/MyCard";
 import { Button } from "@mui/material";
 import { MainPage } from "./pages/MainPage";
 import { ArchivePage, ArchivePageWrapper } from "./pages/ArchivePage";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { InstancePage } from "./pages/InstancePage";
 import { useState } from "react";
 import styled from "styled-components";
 import { BookShelfPage } from "./pages/BookShelfPage";
+import { SingleCardPage } from "./pages/SingleCardPage";
 
 
 
@@ -19,11 +20,12 @@ const [instanceName, setInstanceName] = useState('')
     <Box>
       <AppBarComponent setInstanceName={setInstanceName}/>
       <Routes>
-        <Route path="WhatToDoer_v2/" element={<MainPage />} />
-        <Route path="WhatToDoer_v2/main" element={<MainPage />} />
-        <Route path="WhatToDoer_v2/archive" element={<ArchivePage />} />
-        <Route path={`WhatToDoer_v2/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
-        <Route path={`WhatToDoer_v2/BookShelf`} element={<BookShelfPage/>} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/archive" element={<ArchivePage />} />
+        <Route path={`/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
+        <Route path={`/BookShelf`} element={<BookShelfPage/>} />
+        <Route path={'/BookShelf/SingleCardPage/:id'} element={<SingleCardPage/>} />
       </Routes>
     </Box>
   );

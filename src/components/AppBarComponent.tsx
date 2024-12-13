@@ -54,18 +54,18 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem><NavLink to={'/WhatToDoer_v2/main'}><MenuButton>
+          <MenuItem><StyledNavLink to={'/main'}><MenuButton>
             Главная Страница
-          </MenuButton></NavLink></MenuItem>
-          <MenuItem><NavLink to={'WhatToDoer_v2/HeadsOrTales'}><MenuButton onClick={() => props.setInstanceName('HeadsOrTales')}>
+          </MenuButton></StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to={'/HeadsOrTales'}><MenuButton onClick={() => props.setInstanceName('HeadsOrTales')}>
             Орел и Решка
-          </MenuButton></NavLink></MenuItem>
-          <MenuItem><NavLink to={'WhatToDoer_v2/BookShelf'}><MenuButton>
+          </MenuButton></StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to={'/BookShelf'}><MenuButton>
             Книжная полка
-          </MenuButton></NavLink></MenuItem>
-          <MenuItem><NavLink to={'WhatToDoer_v2/archive'}><MenuButton>
+          </MenuButton></StyledNavLink></MenuItem>
+          <MenuItem><StyledNavLink to={'/archive'}><MenuButton>
             Страница Архива
-          </MenuButton></NavLink></MenuItem>
+          </MenuButton></StyledNavLink></MenuItem>
 
           <MenuItem style={{ marginTop: 50 }} onClick={defaultButtonHandler}><MenuButton>
             Сбросить Занятия
@@ -85,14 +85,14 @@ const MenuButton = styled.div`
   width:170px;
   text-align: center;
   color: black;
-  padding: 10px;
   border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.5s ease;
   box-shadow: 3px 1px 10px   #2f3136;
+  padding: 10px 15px;
 
-    &:focus, &:hover, &:visited, &:link, &:active {
+    &:focus, &:hover, &:active {
         text-decoration: none;
         background-color:  #82c5ff;
     }
@@ -114,10 +114,6 @@ const ToolbarStyled = styled(Toolbar)`
   justify-content: space-between;
   align-items: center;
   position: sticky;
-
-  &:NavLink {
-    text-decoration: none;
-  }
 `
 
 export const H1Styled = styled.h1`
@@ -128,3 +124,19 @@ export const H1Styled = styled.h1`
   text-shadow: 3px 1px 10px   #2f3136;
   font-family: 'Jaro';
 `
+
+const StyledNavLink = styled(NavLink)`
+    text-decoration: none; // Убираем подчеркивание
+    border-radius: 5px; // Скругление углов
+    transition: background-color 0.3s; // Плавный переход
+    &:focus, &:hover, &:active {
+        text-decoration: none; // Убираем подчеркивание
+        background-color:  #82c5ff; // ��вет фона при наведении
+    }
+/* 
+    &.active {
+        background-color: lightblue; // Цвет фона для активной ссылки
+        color: white; // Цвет текста для активной ссылки
+    } */
+`;
+

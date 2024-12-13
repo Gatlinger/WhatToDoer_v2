@@ -65,6 +65,7 @@ export const bookShelfReduser = (state: BookType[] = BookShelfInitialState, acti
         }
         case 'GET_PAGE_BOOKS': {
             let newState: BookType[] = []
+            newState = []
             Array.isArray(action.books) 
             ? newState = action.books
             : newState = state
