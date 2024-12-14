@@ -20,11 +20,11 @@ const [instanceName, setInstanceName] = useState('')
     <Box>
       <AppBarComponent setInstanceName={setInstanceName}/>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/*" element={<Navigate to={"/main"}/>} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/archive" element={<ArchivePage />} />
         <Route path={`/${instanceName}`} element={<InstancePage instanceId={instanceName} />} />
-        <Route path={`/BookShelf`} element={<BookShelfPage/>} />
+        <Route path={`/BookShelf/:pageId`} element={<BookShelfPage/>} />
         <Route path={'/BookShelf/SingleCardPage/:id'} element={<SingleCardPage/>} />
       </Routes>
     </Box>

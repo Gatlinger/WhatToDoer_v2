@@ -7,9 +7,7 @@ import { BookCover } from "../components/BookPicture"
 export const SingleCardPage = () => {
     const bookList = useSelector<AppRootStateType, BookType[]>(state => state.bookshelf)
     const params = useParams()
-    console.log(params)
     const book = bookList.find(item => item.id === params.id)
-    console.log('book: ', book)
     return (
         <div>
             <BookCover src={book?.pictureUrl} />
