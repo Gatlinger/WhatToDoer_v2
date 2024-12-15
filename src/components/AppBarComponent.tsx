@@ -60,7 +60,7 @@ export const AppBarComponent = (props: AppBarComponentPropsType) => {
           <MenuItem><StyledNavLink to={'/HeadsOrTales'}><MenuButton onClick={() => props.setInstanceName('HeadsOrTales')}>
             Орел и Решка
           </MenuButton></StyledNavLink></MenuItem>
-          <MenuItem><StyledNavLink to={'/BookShelf/0'}><MenuButton>
+          <MenuItem><StyledNavLink to={`/BookShelf/Война и мир/0`}><MenuButton>
             Книжная полка
           </MenuButton></StyledNavLink></MenuItem>
           <MenuItem><StyledNavLink to={'/archive'}><MenuButton>

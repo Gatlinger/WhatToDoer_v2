@@ -7,7 +7,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { MyBookCard } from "../components/MyBookCard"
 import { Button } from "@mui/material"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { log } from "node:console"
 
 export const BookShelfPage = () => {
     const bookshelf = useSelector<AppRootStateType, BookType[]>(state => state.bookshelf)
@@ -15,20 +16,22 @@ export const BookShelfPage = () => {
     let params = useParams()
     const navigate = useNavigate()
     const [currentPage, setCurrentPage] = useState<number>(Number(params.pageId))
-    const [SearchInput, setSearchInput] = useState("Архипелаг_Грез")
+    const [SearchInput, setSearchInput] = useState(params.searchInput || localStorage.getItem('searchLSParam') || 'Война и мир')
     const [flag, setFlag] = useState<boolean>(false)
     const resultsPerPage = 10
 
     const dispatch = useDispatch()
-
-    // const checkBoxHandler = (id: string) => {
-    //     dispatch(checkBoxHandlerAC(id))
-    // }
     useEffect(() => {
         if (Number(params.pageId) < 0) {
-            navigate("/BookShelf/0")
+            navigate(`/BookShelf/${SearchInput}/0`)
         }
+        return
     }, [])
+
+    // useEffect(() => {
+    //     setCurrentPage(0)
+    //     navigate(`/Bookshelf/${SearchInput}/${currentPage}`)
+    // }, [params])
 
     useEffect(() => {
         dispatch(getBooksAC(books))
@@ -41,7 +44,10 @@ export const BookShelfPage = () => {
     useEffect(() => {
         setCurrentPage(0)
         getNewPage(currentPage)
+        params = { ...params, searchParam: SearchInput }
+        localStorage.setItem('searchLSParam', SearchInput)
     }, [SearchInput])
+
 
     let booksArray: BookType[] = []
     const getNewPage = async (page: number) => {
@@ -81,25 +87,22 @@ export const BookShelfPage = () => {
         const nextPageId = Number(params.pageId) + 1
         setCurrentPage(nextPageId)
         getNewPage(nextPageId)
-        navigate(`/BookShelf/${nextPageId}`)
+        navigate(`/BookShelf/${SearchInput}/${nextPageId}`)
     }
     const getPrevPage = () => {
-
-        if (currentPage !== 0) {
-            const prevPageId = currentPage - 1
-            setCurrentPage(prevPageId)
-            navigate(`/BookShelf/${prevPageId}`)
-        } else {
-        }
-
-        
-        getNewPage(currentPage)
+        const prevPageId = Number(params.pageId) - 1
+        setCurrentPage(prevPageId)
+        getNewPage(prevPageId)
+        navigate(`/BookShelf/${SearchInput}/${prevPageId}`)
     }
     const onInputChangeHandler = (event: any) => {
         if (event.key === 'Enter') {
-            setSearchInput(event.target.value.replace(/ /g, '_'))
-            console.log(SearchInput);
-
+            console.log('alkjdfhg;akljsghkl;');
+            const SerchParam = event.target.value.replace(/ /g, '_')
+            setSearchInput(SerchParam)
+            navigate(`/BookShelf/${SerchParam}/0`)
+            setCurrentPage(0)
+            console.log(params);
         }
     }
 
@@ -124,9 +127,9 @@ export const BookShelfPage = () => {
             <input onKeyUp={onInputChangeHandler} />
 
             <RollButtonWrapper>
-                <RollButtonStyled size="large" variant="contained" onClick={() => getPrevPage()}>Назад</RollButtonStyled>
+                <RollButtonStyled disabled={Number(params.pageId) === 0} size="large" variant="contained" onClick={getPrevPage}>Назад</RollButtonStyled>
                 <h2>{params.pageId}</h2>
-                <RollButtonStyled size="large" variant="contained" onClick={() => getNextPage()}>Вперед</RollButtonStyled>
+                <RollButtonStyled size="large" variant="contained" onClick={getNextPage}>Вперед</RollButtonStyled>
             </RollButtonWrapper>
 
             <AppMainBox>
@@ -142,9 +145,9 @@ export const BookShelfPage = () => {
             </AppMainBox>
 
             <RollButtonWrapper>
-                <RollButtonStyled size="large" variant="contained" onClick={() => getPrevPage()}>Назад</RollButtonStyled>
+                <RollButtonStyled disabled={Number(params.pageId) === 0} size="large" variant="contained" onClick={getPrevPage}>Назад</RollButtonStyled>
                 <h2>{params.pageId}</h2>
-                <RollButtonStyled size="large" variant="contained" onClick={() => getNextPage()}>Вперед</RollButtonStyled>
+                <RollButtonStyled size="large" variant="contained" onClick={getNextPage}>Вперед</RollButtonStyled>
             </RollButtonWrapper>
 
         </BookShelfPageWrapper>)
