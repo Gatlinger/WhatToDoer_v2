@@ -17,10 +17,6 @@ export const MyBookCard = (props: MyBookCardPropsType) => {
 
     const navigate = useNavigate()
 
-    const handleDoubleClick = (adress: string) => {
-        navigate(adress)
-    }
-
     return (
         <Link style={{textDecoration:'none'}} to={`/BookShelf/SingleCardPage/${props.BookId}`}>
             <BookCard

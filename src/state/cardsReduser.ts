@@ -144,7 +144,6 @@ export const cardsReducer = (state: DataType[] = initialState, action: CardsRedu
             return HeadsOrTales
         }
         case 'MAIN_PAGE_START': {
-            console.log("MAIN_PAGE_START");
             return JSON.parse(localStorage.getItem("dataBase") || "[]")
         }
         default:

@@ -28,11 +28,6 @@ export const BookShelfPage = () => {
         return
     }, [])
 
-    // useEffect(() => {
-    //     setCurrentPage(0)
-    //     navigate(`/Bookshelf/${SearchInput}/${currentPage}`)
-    // }, [params])
-
     useEffect(() => {
         dispatch(getBooksAC(books))
     }, [books])
@@ -55,7 +50,7 @@ export const BookShelfPage = () => {
 
         try {
             setFlag(true)
-            const response = await axios(`https://www.googleapis.com/books/v1/volumes?q=${SearchInput}&startIndex=${startIndex}&maxResults=${resultsPerPage}`)
+            const response = await axios(`https://www.googleapis.com/books/v1/volumes?q=${SearchInput}&orderBy=relevance&startIndex=${startIndex}&maxResults=${resultsPerPage}`)
                 .then(res => {
 
 
@@ -97,12 +92,10 @@ export const BookShelfPage = () => {
     }
     const onInputChangeHandler = (event: any) => {
         if (event.key === 'Enter') {
-            console.log('alkjdfhg;akljsghkl;');
             const SerchParam = event.target.value.replace(/ /g, '_')
             setSearchInput(SerchParam)
             navigate(`/BookShelf/${SerchParam}/0`)
             setCurrentPage(0)
-            console.log(params);
         }
     }
 

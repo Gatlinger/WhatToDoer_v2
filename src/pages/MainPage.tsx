@@ -20,8 +20,6 @@ export const MainPage = () => {
   useEffect(() => {
     setChoise(emptyChoisenItem as DataType)
     dispatch(MainStartAC())
-    console.log('Effect');
-    
   }, []
   )
 
